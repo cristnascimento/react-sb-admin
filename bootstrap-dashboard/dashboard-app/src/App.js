@@ -4,7 +4,7 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import Dashboard from './Components/Dashboard/Dashboard';
 import Buttons from './Components/Components/Buttons';
 
-import './App.css';
+//import './App.css';
 
 function App() {
   return (
