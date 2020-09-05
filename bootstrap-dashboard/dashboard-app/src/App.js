@@ -8,6 +8,7 @@ import Colors from './Components/Utilities/Colors';
 import Borders from './Components/Utilities/Borders';
 import Animations from './Components/Utilities/Animations';
 import Other from './Components/Utilities/Other';
+import Login from './Components/Pages/Login';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path='/borders' component={Borders} />
           <Route path='/animations' component={Animations} />
           <Route path='/other' component={Other} />
+          <Route path='/login' component={Login} />
         </Switch>
       </BrowserRouter>
     </div>
