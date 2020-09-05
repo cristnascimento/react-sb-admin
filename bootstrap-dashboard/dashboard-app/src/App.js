@@ -3,8 +3,7 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
 import Dashboard from './Components/Dashboard/Dashboard';
 import Buttons from './Components/Components/Buttons';
-
-//import './App.css';
+import Cards from './Components/Components/Cards';
 
 function App() {
   return (
@@ -13,6 +12,7 @@ function App() {
         <Switch>
           <Route path='/' exact component={Dashboard} />
           <Route path='/buttons' component={Buttons} />
+          <Route path='/cards' component={Cards} />
         </Switch>
       </BrowserRouter>
     </div>
