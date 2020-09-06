@@ -9,6 +9,7 @@ import Borders from './Components/Utilities/Borders';
 import Animations from './Components/Utilities/Animations';
 import Other from './Components/Utilities/Other';
 import Login from './Components/Pages/Login';
+import Register from './Components/Pages/Register';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path='/animations' component={Animations} />
           <Route path='/other' component={Other} />
           <Route path='/login' component={Login} />
+          <Route path='/register' component={Register} />
         </Switch>
       </BrowserRouter>
     </div>
