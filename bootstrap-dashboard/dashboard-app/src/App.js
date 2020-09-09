@@ -10,6 +10,7 @@ import Animations from './Components/Utilities/Animations';
 import Other from './Components/Utilities/Other';
 import Login from './Components/Pages/Login';
 import Register from './Components/Pages/Register';
+import Forgot from './Components/Pages/Forgot';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path='/other' component={Other} />
           <Route path='/login' component={Login} />
           <Route path='/register' component={Register} />
+          <Route path='/forgot' component={Forgot} />
         </Switch>
       </BrowserRouter>
     </div>
