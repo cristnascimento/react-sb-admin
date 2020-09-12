@@ -14,6 +14,7 @@ import Forgot from './Components/Pages/Forgot';
 import NotFound from './Components/Pages/NotFound';
 import Blank from './Components/Pages/Blank';
 import Charts from './Components/Charts/Charts';
+import Tables from './Components/Tables/Tables';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path='/notfound' component={NotFound} />
           <Route path='/blank' component={Blank} />
           <Route path='/charts' component={Charts} />
+          <Route path='/tables' component={Tables} />
         </Switch>
       </BrowserRouter>
     </div>
