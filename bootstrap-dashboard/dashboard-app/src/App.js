@@ -13,6 +13,7 @@ import Register from './Components/Pages/Register';
 import Forgot from './Components/Pages/Forgot';
 import NotFound from './Components/Pages/NotFound';
 import Blank from './Components/Pages/Blank';
+import Charts from './Components/Charts/Charts';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path='/forgot' component={Forgot} />
           <Route path='/notfound' component={NotFound} />
           <Route path='/blank' component={Blank} />
+          <Route path='/charts' component={Charts} />
         </Switch>
       </BrowserRouter>
     </div>
