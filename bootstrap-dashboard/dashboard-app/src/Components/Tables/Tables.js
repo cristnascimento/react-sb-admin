@@ -1,6 +1,30 @@
-import React from 'react';
+import React, {useRef, useEffect} from 'react';
+import ScriptTag from 'react-script-tag';
+
+//import showTable from './datatables-demo';
 
 const Tables = (props) => {
+
+    const tableRef = useRef(null);
+
+    const dt = () => {
+        return (
+            <div>
+            <ScriptTag type="text/javascript" src="vendor/datatables/jquery.dataTables.min.js"/>
+            <ScriptTag type="text/javascript" src="vendor/datatables/dataTables.bootstrap4.min.js"/>
+            <ScriptTag type="text/javascript" src="js/demo/datatables-demo.js"/>
+              </div>
+        );
+    }
+
+    useEffect(() => {
+        if (tableRef && tableRef.current) {
+           // showTable();
+          //const newChartInstance = new Chart(chartContainer.current, chartConfig);
+          //setChartInstance(newChartInstance);
+        }
+      }, [tableRef]);
+
     return (
         <div id="wrapper">
         {/* Page Wrapper */}
@@ -323,7 +347,7 @@ const Tables = (props) => {
                   </div>
                   <div className="card-body">
                     <div className="table-responsive">
-                      <table className="table table-bordered" id="dataTable" width="100%" cellSpacing="0">
+                      <table className="table table-bordered" id="dataTable" ref={tableRef} width="100%" cellSpacing="0">
                         <thead>
                           <tr>
                             <th>Name</th>
@@ -829,11 +853,8 @@ const Tables = (props) => {
 
 
   {/* Page level custom scripts */}
-  <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-    
-  <script src="js/demo/datatables-demo.js"></script>   
+  <ScriptTag type="text/javascript" src="js/demo/datatables-demo.js"/>
         </div>
     );
 }
