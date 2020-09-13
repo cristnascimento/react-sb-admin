@@ -1,6 +1,7 @@
 import React from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
+import Layout from './Components/Layout/Layout';
 import Dashboard from './Components/Dashboard/Dashboard';
 import Buttons from './Components/Components/Buttons';
 import Cards from './Components/Components/Cards';
@@ -21,6 +22,10 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Switch>
+        <Route path='/forgot' component={Forgot} />
+        <Route path='/login' component={Login} />
+        <Route path='/register' component={Register} />
+        <Layout>
           <Route path='/' exact component={Dashboard} />
           <Route path='/buttons' component={Buttons} />
           <Route path='/cards' component={Cards} />
@@ -28,13 +33,11 @@ function App() {
           <Route path='/borders' component={Borders} />
           <Route path='/animations' component={Animations} />
           <Route path='/other' component={Other} />
-          <Route path='/login' component={Login} />
-          <Route path='/register' component={Register} />
-          <Route path='/forgot' component={Forgot} />
           <Route path='/notfound' component={NotFound} />
-          <Route path='/blank' component={Blank} />
+          <Route path='/blank' component={Blank} /> 
           <Route path='/charts' component={Charts} />
           <Route path='/tables' component={Tables} />
+        </Layout>
         </Switch>
       </BrowserRouter>
     </div>
