@@ -16,6 +16,7 @@ import NotFound from './Components/Pages/NotFound';
 import Blank from './Components/Pages/Blank';
 import Charts from './Components/Charts/Charts';
 import Tables from './Components/Tables/Tables';
+import Dashboard2 from './Components/Dashboard2/Dashboard2';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path='/register' component={Register} />
         <Layout>
           <Route path='/' exact component={Dashboard} />
+          <Route path='/dashboard2' exact component={Dashboard2} />
           <Route path='/buttons' component={Buttons} />
           <Route path='/cards' component={Cards} />
           <Route path='/colors' component={Colors} />
