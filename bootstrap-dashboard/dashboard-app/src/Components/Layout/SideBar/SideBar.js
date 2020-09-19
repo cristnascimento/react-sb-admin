@@ -23,11 +23,7 @@ const SideBar = (props) => {
             <i className="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></Link>
         </li>
-        <li className="nav-item active">
-          <Link className="nav-link" to="/dashboard2">
-            <i className="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard 2 </span></Link>
-        </li>
+
         {/* Divider */}
         <hr className="sidebar-divider"/>
 
