@@ -20,7 +20,6 @@ import Dashboard2 from './Components/Dashboard2/Dashboard2';
 
 function App() {
   return (
-    <div className="App">
       <BrowserRouter>
         <Switch>
         <Route path='/forgot' component={Forgot} />
@@ -42,7 +41,6 @@ function App() {
         </Layout>
         </Switch>
       </BrowserRouter>
-    </div>
   );
 }
 

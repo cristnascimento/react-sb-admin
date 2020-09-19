@@ -2,11 +2,10 @@ import React from 'react';
 
 const SideBar = (props) => {
     return (
-        <div>
-                  {/* Sidebar */}
-    <ul className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+      <ul className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        {/* Sidebar */}
 
-{/* Sidebar - Brand */}
+        {/* Sidebar - Brand */}
 <a className="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
   <div className="sidebar-brand-icon rotate-n-15">
     <i className="fas fa-laugh-wink"></i>
@@ -113,10 +112,9 @@ const SideBar = (props) => {
 <div className="text-center d-none d-md-inline">
   <button className="rounded-circle border-0" id="sidebarToggle"></button>
 </div>
-
-</ul>
 {/* End of Sidebar */}
-        </div>
+</ul>
+
     );
 }
 

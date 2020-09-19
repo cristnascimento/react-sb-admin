@@ -2,7 +2,7 @@ import React from 'react';
 
 const Content = (props) => {
     return (
-        <div>{props.children}</div>
+        <div id="content">{props.children}</div>
     );
 }
 

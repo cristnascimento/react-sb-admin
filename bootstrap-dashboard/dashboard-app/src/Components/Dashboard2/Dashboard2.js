@@ -25,17 +25,8 @@ const Dashboard2 = (props) => {
 
 
     return (
-  <div id="wrapper">
-
-    {/* Content Wrapper */}
-    <div id="content-wrapper" className="d-flex flex-column">
-
-      {/* Main Content */}
-      <div id="content">
-
-        {/* Begin Page Content */}
         <div className="container-fluid">
-
+ {/* Begin Page Content */}
           {/* Page Heading */}
           <div className="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 className="h3 mb-0 text-gray-800">Dashboard</h1>
@@ -330,36 +321,20 @@ const Dashboard2 = (props) => {
             </div>
           </div>
 
-        </div>
         {/* /.container-fluid */}
 
-      </div>
-      {/* End of Main Content */}
 
-      {/* Footer */}
-      <footer className="sticky-footer bg-white">
-        <div className="container my-auto">
-          <div className="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2020</span>
-          </div>
-        </div>
-      </footer>
-      {/* End of Footer */}
-
-    </div>
-    {/* End of Content Wrapper */}
 
     {/* Scroll to Top Button */}
-  <a className="scroll-to-top rounded" href="#root">
+    <a className="scroll-to-top rounded" href="#root">
     <i className="fas fa-angle-up"></i>
   </a>
   <script src="vendor/chart.js/Chart.min.js"></script>
   {/* Page level custom scripts */}
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>    
-  </div>
-  
 
+        </div>
     );
 }
 
