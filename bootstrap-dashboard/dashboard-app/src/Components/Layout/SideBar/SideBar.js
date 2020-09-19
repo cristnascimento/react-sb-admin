@@ -87,7 +87,7 @@ const SideBar = (props) => {
               <div className="collapse-divider"></div>
               <h6 className="collapse-header">Other Pages:</h6>
               <Link className="collapse-item" to="/notfound">404 Page</Link>
-              <Link className="collapse-item" to="blank.html">Blank Page</Link>
+              <Link className="collapse-item" to="/blank">Blank Page</Link>
             </div>
           </div>
         </li>
