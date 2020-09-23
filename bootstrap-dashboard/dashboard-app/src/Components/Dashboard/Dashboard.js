@@ -1,25 +1,15 @@
-import React, {useRef, useEffect} from 'react';
-import Chart from 'chart.js'
+import React from 'react';
 
-import fillPie from './chart-pie-demo';
 import PageHeading from './PageHeading';
 import EarningsMonthly from './EarningsMonthly';
 import EarningsAnnual from './EarningsAnnual';
 import Tasks from './Tasks';
 import PendingRequests from './PendingRequests';
 import AreaChart from './AreaChart';
+import PieChart from './PieChart';
 
 const Dashboard = (props) => {
 
-    const chartContainer = useRef(null);
-    
-    useEffect(() => {
-        if (chartContainer && chartContainer.current) {
-            fillPie(chartContainer);
-          //const newChartInstance = new Chart(chartContainer.current, chartConfig);
-          //setChartInstance(newChartInstance);
-        }
-      }, [chartContainer]);
 
     return (
         <div className="container-fluid">
@@ -38,48 +28,8 @@ const Dashboard = (props) => {
 
           {/* Content Row */}
           <div className="row">
-
-            {/* Area Chart */}
             <AreaChart/>
-
-            {/* Pie Chart */}
-            <div className="col-xl-4 col-lg-5">
-              <div className="card shadow mb-4">
-                {/* Card Header - Dropdown */}
-                <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 className="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-                  <div className="dropdown no-arrow">
-                    <a className="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i className="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                    <div className="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                      <div className="dropdown-header">Dropdown Header:</div>
-                      <a className="dropdown-item" href="#">Action</a>
-                      <a className="dropdown-item" href="#">Another action</a>
-                      <div className="dropdown-divider"></div>
-                      <a className="dropdown-item" href="#">Something else here</a>
-                    </div>
-                  </div>
-                </div>
-                {/* Card Body */}
-                <div className="card-body">
-                  <div className="chart-pie pt-4 pb-2">
-                    <canvas id="myPieChart" ref={chartContainer}></canvas>
-                  </div>
-                  <div className="mt-4 text-center small">
-                    <span className="mr-2">
-                      <i className="fas fa-circle text-primary"></i> Direct
-                    </span>
-                    <span className="mr-2">
-                      <i className="fas fa-circle text-success"></i> Social
-                    </span>
-                    <span className="mr-2">
-                      <i className="fas fa-circle text-info"></i> Referral
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <PieChart/>
           </div>
 
           {/* Content Row */}
@@ -93,7 +43,7 @@ const Dashboard = (props) => {
                 <div className="card-header py-3">
                   <h6 className="m-0 font-weight-bold text-primary">Projects</h6>
                 </div>
-                <div className="card-body">
+                <div className="car d-body">
                   <h4 className="small font-weight-bold">Server Migration <span className="float-right">20%</span></h4>
                   <div className="progress mb-4">
                     <div className="progress-bar bg-danger" role="progressbar" style={{width: '20%'}} aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
