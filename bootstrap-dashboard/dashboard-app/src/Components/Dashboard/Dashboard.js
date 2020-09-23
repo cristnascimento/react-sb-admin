@@ -12,9 +12,9 @@ import ColorSystem from './ColorSystem';
 import Illustrations from './Illustrations';
 import Approach from './Approach';
 import Row from './Row';
+import Column from './Column';
 
 const Dashboard = (props) => {
-
 
     return (
         <div className="container-fluid">
@@ -33,24 +33,20 @@ const Dashboard = (props) => {
           </Row>
 
           <Row>
-
-            <div className="col-lg-6 mb-4">
+            <Column>
               <Projects/>
               <ColorSystem/>
-            </div>
-
-            <div className="col-lg-6 mb-4">
+            </Column>
+            <Column>
               <Illustrations/>
               <Approach/>  
-            </div>
+            </Column>
           </Row>
       
           {/* Scroll to Top Button */}
           <a className="scroll-to-top rounded" href="#root">
             <i className="fas fa-angle-up"></i>
           </a>
-
-      {/* /.container-fluid */}
       </div>
     );
 }
