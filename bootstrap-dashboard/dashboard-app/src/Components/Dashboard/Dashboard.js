@@ -11,33 +11,28 @@ import Projects from './Projects';
 import ColorSystem from './ColorSystem';
 import Illustrations from './Illustrations';
 import Approach from './Approach';
+import Row from './Row';
 
 const Dashboard = (props) => {
 
 
     return (
         <div className="container-fluid">
-        {/* Begin Page Content */}
-
-          {/* Page Heading */}
           <PageHeading/>
-
-          {/* Content Row */}
-          <div className="row">
+          
+          <Row>
             <EarningsMonthly/>
             <EarningsAnnual/>
             <Tasks/>
             <PendingRequests/>
-          </div>
+          </Row>
 
-          {/* Content Row */}
-          <div className="row">
+          <Row>
             <AreaChart/>
             <PieChart/>
-          </div>
+          </Row>
 
-          {/* Content Row */}
-          <div className="row">
+          <Row>
 
             <div className="col-lg-6 mb-4">
               <Projects/>
@@ -48,7 +43,7 @@ const Dashboard = (props) => {
               <Illustrations/>
               <Approach/>  
             </div>
-          </div>
+          </Row>
       
           {/* Scroll to Top Button */}
           <a className="scroll-to-top rounded" href="#root">
