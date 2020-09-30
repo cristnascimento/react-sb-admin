@@ -1,4 +1,5 @@
 import React from 'react';
+import FontSize from './FontSize';
 import TextColor from './TextColor';
 
 const Colors = (props) => {
@@ -15,20 +16,8 @@ const Colors = (props) => {
 
             {/* First Column */}
             <div className="col-lg-4">
-
               <TextColor/>
-
-              {/* Custom Font Size Utilities */}
-              <div className="card shadow mb-4">
-                <div className="card-header py-3">
-                  <h6 className="m-0 font-weight-bold text-primary">Custom Font Size Utilities</h6>
-                </div>
-                <div className="card-body">
-                  <p className="text-xs">.text-xs</p>
-                  <p className="text-lg mb-0">.text-lg</p>
-                </div>
-              </div>
-
+              <FontSize/>
             </div>
 
             {/* Second Column */}
