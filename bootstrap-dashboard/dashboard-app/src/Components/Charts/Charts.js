@@ -4,11 +4,12 @@ import Chart from 'chart.js';
 import fillArea2 from './chart-area-demo';
 import fillPie2 from './chart-pie-demo';
 import fillBar from './chart-bar-demo';
+import AreaChart from '../Dashboard/AreaChart';
 
 const Charts = (props) => {
 
     const chartContainer = useRef(null);
-    const chartContainerArea = useRef(null);
+    
     const chartBar = useRef(null);
 
     useEffect(() => {
@@ -19,12 +20,7 @@ const Charts = (props) => {
         }
       }, [chartContainer]);
 
-    useEffect(() => {
-        if (chartContainerArea && chartContainerArea.current) {
-            fillArea2(chartContainerArea);
-        //setChartInstance(newChartInstance);
-        }
-    }, [chartContainerArea]);
+    
 
     useEffect(() => {
         if (chartBar && chartBar.current) {
@@ -46,20 +42,8 @@ const Charts = (props) => {
 
           <div className="col-xl-8 col-lg-7">
 
-            {/* Area Chart */}
-            <div className="card shadow mb-4">
-              <div className="card-header py-3">
-                <h6 className="m-0 font-weight-bold text-primary">Area Chart</h6>
-              </div>
-              <div className="card-body">
-                <div className="chart-area">
-                  <canvas id="myAreaChart" ref={chartContainerArea}></canvas>
-                </div>
-                <hr/>
-                Styling for the area chart can be found in the <code>/js/demo/chart-area-demo.js</code> file.
-              </div>
-            </div>
-
+            <AreaChart/>
+            
             {/* Bar Chart */}
             <div className="card shadow mb-4">
               <div className="card-header py-3">
