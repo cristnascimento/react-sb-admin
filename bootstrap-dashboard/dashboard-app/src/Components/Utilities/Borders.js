@@ -1,4 +1,5 @@
 import React from 'react';
+import BorderLeft from './BorderLeft';
 
 const Borders = (props) => {
     return (  
@@ -12,53 +13,8 @@ const Borders = (props) => {
           {/* Content Row */}
           <div className="row">
 
-            {/* Border Left Utilities */}
-            <div className="col-lg-6">
-
-              <div className="card mb-4 py-3 border-left-primary">
-                <div className="card-body">
-                  .border-left-primary
-                </div>
-              </div>
-
-              <div className="card mb-4 py-3 border-left-secondary">
-                <div className="card-body">
-                  .border-left-secondary
-                </div>
-              </div>
-
-              <div className="card mb-4 py-3 border-left-success">
-                <div className="card-body">
-                  .border-left-success
-                </div>
-              </div>
-
-              <div className="card mb-4 py-3 border-left-info">
-                <div className="card-body">
-                  .border-left-info
-                </div>
-              </div>
-
-              <div className="card mb-4 py-3 border-left-warning">
-                <div className="card-body">
-                  .border-left-warning
-                </div>
-              </div>
-
-              <div className="card mb-4 py-3 border-left-danger">
-                <div className="card-body">
-                  .border-left-danger
-                </div>
-              </div>
-
-              <div className="card mb-4 py-3 border-left-dark">
-                <div className="card-body">
-                  .border-left-dark
-                </div>
-              </div>
-
-            </div>
-
+            <BorderLeft/>
+            
             {/* Border Bottom Utilities */}
             <div className="col-lg-6">
 
