@@ -1,4 +1,5 @@
 import React from 'react';
+import Overflow from './Overflow';
 
 const Other = (props) => {
     return (
@@ -13,16 +14,7 @@ const Other = (props) => {
         <div className="row">
 
           <div className="col-lg-6">
-
-            {/* Overflow Hidden */}
-            <div className="card mb-4">
-              <div className="card-header py-3">
-                <h6 className="m-0 font-weight-bold text-primary">Overflow Hidden Utilty</h6>
-              </div>
-              <div className="card-body">
-                Use <code>.o-hidden</code> to set the overflow property of any element to hidden.
-              </div>
-            </div>
+            <Overflow/> 
 
             {/* Progress Small */}
             <div className="card mb-4">
