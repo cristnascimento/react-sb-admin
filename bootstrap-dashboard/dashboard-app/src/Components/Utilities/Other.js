@@ -2,6 +2,7 @@ import React from 'react';
 import Dropdown from './Dropdown';
 import Overflow from './Overflow';
 import Progress from './Progress';
+import Rotation from './Rotation';
 
 const Other = (props) => {
     return (
@@ -22,19 +23,7 @@ const Other = (props) => {
           </div>
 
           <div className="col-lg-6">
-
-            {/* Roitation Utilities */}
-            <div className="card">
-              <div className="card-header py-3">
-                <h6 className="m-0 font-weight-bold text-primary">Rotation Utilities</h6>
-              </div>
-              <div className="card-body text-center">
-                <div className="bg-primary text-white p-3 rotate-15 d-inline-block my-4">.rotate-15</div>
-                <hr/>
-                <div className="bg-primary text-white p-3 rotate-n-15 d-inline-block my-4">.rotate-n-15</div>
-              </div>
-            </div>
-
+            <Rotation/>
           </div>
 
         </div>
