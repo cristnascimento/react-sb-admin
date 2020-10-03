@@ -1,16 +1,14 @@
 import React, {useRef, useEffect} from 'react';
 import Chart from 'chart.js';
 
-import fillArea2 from './chart-area-demo';
 import fillPie2 from './chart-pie-demo';
-import fillBar from './chart-bar-demo';
-import AreaChart from '../Dashboard/AreaChart';
+
+import AreaChart from './AreaChart';
+import BarChart from './BarChart';
 
 const Charts = (props) => {
 
     const chartContainer = useRef(null);
-    
-    const chartBar = useRef(null);
 
     useEffect(() => {
         if (chartContainer && chartContainer.current) {
@@ -19,15 +17,6 @@ const Charts = (props) => {
           //setChartInstance(newChartInstance);
         }
       }, [chartContainer]);
-
-    
-
-    useEffect(() => {
-        if (chartBar && chartBar.current) {
-            fillBar(chartBar);
-        //setChartInstance(newChartInstance);
-        }
-    }, [chartBar]);
 
     return (            
       <div className="container-fluid">
@@ -43,21 +32,8 @@ const Charts = (props) => {
           <div className="col-xl-8 col-lg-7">
 
             <AreaChart/>
-            
-            {/* Bar Chart */}
-            <div className="card shadow mb-4">
-              <div className="card-header py-3">
-                <h6 className="m-0 font-weight-bold text-primary">Bar Chart</h6>
-              </div>
-              <div className="card-body">
-                <div className="chart-bar">
-                  <canvas id="myBarChart" ref={chartBar}></canvas>
-                </div>
-                <hr/>
-                Styling for the bar chart can be found in the <code>/js/demo/chart-bar-demo.js</code> file.
-              </div>
-            </div>
-
+            <BarChart/>
+         
           </div>
 
           {/* Donut Chart */}
