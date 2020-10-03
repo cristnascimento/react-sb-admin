@@ -1,4 +1,5 @@
 import React from 'react';
+import BorderBottom from './BorderBottom';
 import BorderLeft from './BorderLeft';
 
 const Borders = (props) => {
@@ -14,54 +15,8 @@ const Borders = (props) => {
           <div className="row">
 
             <BorderLeft/>
-            
-            {/* Border Bottom Utilities */}
-            <div className="col-lg-6">
-
-              <div className="card mb-4 py-3 border-bottom-primary">
-                <div className="card-body">
-                  .border-bottom-primary
-                </div>
-              </div>
-
-              <div className="card mb-4 py-3 border-bottom-secondary">
-                <div className="card-body">
-                  .border-bottom-secondary
-                </div>
-              </div>
-
-              <div className="card mb-4 py-3 border-bottom-success">
-                <div className="card-body">
-                  .border-bottom-success
-                </div>
-              </div>
-
-              <div className="card mb-4 py-3 border-bottom-info">
-                <div className="card-body">
-                  .border-bottom-info
-                </div>
-              </div>
-
-              <div className="card mb-4 py-3 border-bottom-warning">
-                <div className="card-body">
-                  .border-bottom-warning
-                </div>
-              </div>
-
-              <div className="card mb-4 py-3 border-bottom-danger">
-                <div className="card-body">
-                  .border-bottom-danger
-                </div>
-              </div>
-
-              <div className="card mb-4 py-3 border-bottom-dark">
-                <div className="card-body">
-                  .border-bottom-dark
-                </div>
-              </div>
-
-            </div>
-
+            <BorderBottom/>
+           
           </div>
       {/* /.container-fluid */}
       </div>
