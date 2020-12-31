@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const Register = (props) => {
+    const [state, setState] = useState({});
+    
     return (
         <div className="bg-gradient-primary">
         <div className="container">
