@@ -32,7 +32,9 @@ const Register = (props) => {
 
     const formHandler = (event) => {
       event.preventDefault();
-      console.log("Form submitted");
+      console.log("Form submitted!");
+      console.log(state.firstName);
+      console.log(state.lastName);
     }
 
     return (
