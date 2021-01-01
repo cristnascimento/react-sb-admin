@@ -1,8 +1,40 @@
 import React, { useState } from 'react';
 
 const Register = (props) => {
-    const [state, setState] = useState({});
-    
+    const [state, setState] = useState({
+      firstName: "",
+      lastName: ""
+
+    });
+
+    const handleChange = (event) => {
+        const {name, value, type, checked} = event.target;
+
+        // textarea, checkbox, radio, select
+
+        if (type === "checkbox") {
+          setState({
+            ...state,
+            [name]: checked
+          });
+          return;
+        }
+
+        // radio: has checked and value
+
+        setState({
+          ...state,
+          [name]: value
+        });
+
+        console.log(state.firstName);
+    }
+
+    const formHandler = (event) => {
+      event.preventDefault();
+      console.log("Form submitted");
+    }
+
     return (
         <div className="bg-gradient-primary">
         <div className="container">
@@ -16,13 +48,13 @@ const Register = (props) => {
                   <div className="text-center">
                     <h1 className="h4 text-gray-900 mb-4">Create an Account!</h1>
                   </div>
-                  <form className="user">
+                  <form className="user" onSubmit={formHandler}>
                     <div className="form-group row">
                       <div className="col-sm-6 mb-3 mb-sm-0">
-                        <input type="text" className="form-control form-control-user" id="exampleFirstName" placeholder="First Name"/>
+                        <input type="text" className="form-control form-control-user" id="exampleFirstName" name="firstName" onChange={handleChange} placeholder="First Name"/>
                       </div>
                       <div className="col-sm-6">
-                        <input type="text" className="form-control form-control-user" id="exampleLastName" placeholder="Last Name"/>
+                        <input type="text" className="form-control form-control-user" id="exampleLastName" name="lastName" onChange={handleChange} placeholder="Last Name"/>
                       </div>
                     </div>
                     <div className="form-group">
@@ -36,9 +68,9 @@ const Register = (props) => {
                         <input type="password" className="form-control form-control-user" id="exampleRepeatPassword" placeholder="Repeat Password"/>
                       </div>
                     </div>
-                    <a href="login.html" className="btn btn-primary btn-user btn-block">
+                    <button className="btn btn-primary btn-user btn-block">
                       Register Account
-                    </a>
+                    </button>
                     <hr/>
                     <a href="index.html" className="btn btn-google btn-user btn-block">
                       <i className="fab fa-google fa-fw"></i> Register with Google
