@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { AuthProvider, useAuth } from "../../Contexts/AuthContext";
+import { Link, useHistory } from "react-router-dom"
 
 const Register = (props) => {
     const [state, setState] = useState({
@@ -8,7 +9,10 @@ const Register = (props) => {
 
     });
 
-    const { signup } = useAuth();
+    const [error, setError] = useState("")
+    const [loading, setLoading] = useState(false)
+    const { signup, currentUser } = useAuth();
+    const history = useHistory()
 
     const handleChange = (event) => {
         const {name, value, type, checked} = event.target;
@@ -33,13 +37,32 @@ const Register = (props) => {
         console.log(state.firstName);
     }
 
-    const formHandler = (event) => {
+    async function formHandler (event) {
       event.preventDefault();
       console.log("Form submitted!");
       console.log(state.firstName);
       console.log(state.lastName);
 
-      signup("teste@email.com", "123456");
+      if (state.firstName !== state.lastName) {
+        return setError("Passwords do not match")
+      }
+  
+      try {
+        setError("")
+        setLoading(true)
+        // await signup(emailRef.current.value, passwordRef.current.value)
+        await signup("teste@email.com", "123456");
+        history.push("/")
+      } catch (error) {
+        setError("Failed to create an account. ")
+        console.log("Error message: " + error.message)
+      }
+  
+      setLoading(false)
+
+      
+      console.log("current user: " + currentUser.email)
+      console.log(currentUser)
     }
 
     return (
@@ -55,6 +78,7 @@ const Register = (props) => {
                   <div className="text-center">
                     <h1 className="h4 text-gray-900 mb-4">Create an Account!</h1>
                   </div>
+                  {error && <div className="alert alert-danger" role="alert">{error}</div>}
                   <form className="user" onSubmit={formHandler}>
                     <div className="form-group row">
                       <div className="col-sm-6 mb-3 mb-sm-0">
