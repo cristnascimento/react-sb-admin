@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { AuthProvider, useAuth } from "../../Contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom"
 
@@ -8,7 +8,12 @@ const Register = (props) => {
       lastName: ""
 
     });
-
+    
+    const firstNameRef = useRef()
+    const lastNameRef = useRef()
+    const emailRef = useRef()
+    const passwordRef = useRef()
+    const passwordConfirmRef = useRef()
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
     const { signup, currentUser } = useAuth();
@@ -43,18 +48,45 @@ const Register = (props) => {
       console.log(state.firstName);
       console.log(state.lastName);
 
+      if (!firstNameRef.current.value) {
+        return setError("First name is empty")
+      }
+
+      if (!lastNameRef.current.value) {
+        return setError("Last name is empty")
+      }
+
+      if (!emailRef.current.value) {
+        return setError("Email is empty")
+      }
+
+      if (!emailRef.current.value) {
+        return setError("Password is empty")
+      }
+
+      if (passwordRef.current.value) {
+        if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+          return setError("Passwords do not match")
+        }
+      }
+      else {
+        return setError("Password is empty")
+      }
+
+
+      /*
       if (state.firstName !== state.lastName) {
         return setError("Passwords do not match")
-      }
+      }*/
   
       try {
         setError("")
         setLoading(true)
         // await signup(emailRef.current.value, passwordRef.current.value)
-        await signup("teste@email.com", "123456");
+        await signup(emailRef.current.value, passwordRef.current.value);
         history.push("/")
       } catch (error) {
-        setError("Failed to create an account. ")
+        setError("Failed to create an account. " + error.message)
         console.log("Error message: " + error.message)
       }
   
@@ -82,21 +114,21 @@ const Register = (props) => {
                   <form className="user" onSubmit={formHandler}>
                     <div className="form-group row">
                       <div className="col-sm-6 mb-3 mb-sm-0">
-                        <input type="text" className="form-control form-control-user" id="exampleFirstName" name="firstName" onChange={handleChange} placeholder="First Name"/>
+                        <input type="text" ref={firstNameRef} className="form-control form-control-user" id="exampleFirstName" name="firstName" onChange={handleChange} placeholder="First Name"/>
                       </div>
                       <div className="col-sm-6">
-                        <input type="text" className="form-control form-control-user" id="exampleLastName" name="lastName" onChange={handleChange} placeholder="Last Name"/>
+                        <input type="text" ref={lastNameRef} className="form-control form-control-user" id="exampleLastName" name="lastName" onChange={handleChange} placeholder="Last Name"/>
                       </div>
                     </div>
                     <div className="form-group">
-                      <input type="email" className="form-control form-control-user" id="exampleInputEmail" placeholder="Email Address"/>
+                      <input type="email" ref={emailRef} className="form-control form-control-user" id="exampleInputEmail" placeholder="Email Address"/>
                     </div>
                     <div className="form-group row">
                       <div className="col-sm-6 mb-3 mb-sm-0">
-                        <input type="password" className="form-control form-control-user" id="exampleInputPassword" placeholder="Password"/>
+                        <input type="password" ref={passwordRef} className="form-control form-control-user" id="exampleInputPassword" placeholder="Password"/>
                       </div>
                       <div className="col-sm-6">
-                        <input type="password" className="form-control form-control-user" id="exampleRepeatPassword" placeholder="Repeat Password"/>
+                        <input type="password" ref={passwordConfirmRef} className="form-control form-control-user" id="exampleRepeatPassword" placeholder="Repeat Password"/>
                       </div>
                     </div>
                     <button className="btn btn-primary btn-user btn-block">
