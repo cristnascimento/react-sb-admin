@@ -1,6 +1,39 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
+import { useAuth } from "../../Contexts/AuthContext"
+import { Link, useHistory } from "react-router-dom"
 
 const Login = (props) => {
+
+  const emailRef = useRef()
+  const passwordRef = useRef()
+  const { login, currentUser } = useAuth()
+  const [error, setError] = useState("")
+  const [loading, setLoading] = useState(false)
+  const history = useHistory()
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+
+    if (!emailRef.current.value) {
+      return setError("Email is empty")
+    }
+
+    if (!passwordRef.current.value) {
+      return setError("Password is empty")
+    }
+
+    try {
+      setError("")
+      setLoading(true)
+      await login(emailRef.current.value, passwordRef.current.value)
+      history.push("/")
+    } catch (error) {
+      setError("Failed to log in. " + error.message)
+    }
+
+    setLoading(false)
+    console.log(currentUser)
+  }
     return (
         <div className="bg-gradient-primary">
         <div className="container">
@@ -20,12 +53,13 @@ const Login = (props) => {
                       <div className="text-center">
                         <h1 className="h4 text-gray-900 mb-4">Welcome Back!</h1>
                       </div>
-                      <form className="user">
+                      {error && <div className="alert alert-danger" role="alert">{error}</div>}
+                      <form className="user" onSubmit={handleSubmit}>
                         <div className="form-group">
-                          <input type="email" className="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..."/>
+                          <input type="email" ref={emailRef} className="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..."/>
                         </div>
                         <div className="form-group">
-                          <input type="password" className="form-control form-control-user" id="exampleInputPassword" placeholder="Password"/>
+                          <input type="password" ref={passwordRef} className="form-control form-control-user" id="exampleInputPassword" placeholder="Password"/>
                         </div>
                         <div className="form-group">
                           <div className="custom-control custom-checkbox small">
@@ -33,9 +67,9 @@ const Login = (props) => {
                             <label className="custom-control-label" for="customCheck">Remember Me</label>
                           </div>
                         </div>
-                        <a href="index.html" className="btn btn-primary btn-user btn-block">
+                        <button disabled={loading} className="btn btn-primary btn-user btn-block">
                           Login
-                        </a>
+                        </button>
                         <hr/>
                         <a href="index.html" className="btn btn-google btn-user btn-block">
                           <i className="fab fa-google fa-fw"></i> Login with Google
@@ -49,7 +83,7 @@ const Login = (props) => {
                         <a className="small" href="forgot-password.html">Forgot Password?</a>
                       </div>
                       <div className="text-center">
-                        <a className="small" href="register.html">Create an Account!</a>
+                        <Link className="small" to="/register">Create an Account!</Link>
                       </div>
                     </div>
                   </div>
