@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { AuthProvider, useAuth } from "../../Contexts/AuthContext";
 
 const Register = (props) => {
     const [state, setState] = useState({
@@ -6,6 +7,8 @@ const Register = (props) => {
       lastName: ""
 
     });
+
+    const { signup } = useAuth();
 
     const handleChange = (event) => {
         const {name, value, type, checked} = event.target;
@@ -35,6 +38,8 @@ const Register = (props) => {
       console.log("Form submitted!");
       console.log(state.firstName);
       console.log(state.lastName);
+
+      signup("teste@email.com", "123456");
     }
 
     return (

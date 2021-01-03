@@ -17,9 +17,11 @@ import Blank from './Components/Pages/Blank';
 import Charts from './Components/Charts/Charts';
 import Tables from './Components/Tables/Tables';
 import Dashboard2 from './Components/Dashboard2/Dashboard2';
+import { AuthProvider } from './Contexts/AuthContext';
 
 function App() {
   return (
+    <AuthProvider>
       <BrowserRouter>
         <Switch>
         <Route path='/forgot' component={Forgot} />
@@ -41,6 +43,7 @@ function App() {
         </Layout>
         </Switch>
       </BrowserRouter>
+    </AuthProvider>
   );
 }
 
