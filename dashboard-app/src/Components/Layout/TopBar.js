@@ -1,6 +1,34 @@
-import React from 'react';
+import React, { useRef, useState } from "react"
+import { useAuth } from "../../Contexts/AuthContext"
+import { Link, useHistory } from "react-router-dom"
 
 const TopBar = (props) => {
+
+  const [error, setError] = useState("")
+  const { currentUser, logout } = useAuth()
+  const history = useHistory()
+  const btnRef = useRef();
+
+  async function handleLogout(event) {
+    setError("")
+
+    try {
+      console.log("before logout...")
+      console.log(currentUser)
+      await logout()
+      console.log("after logout...")
+      console.log(currentUser.email)
+      // this is a hack to close backdrop screen from bootstrap modal
+      // it works normally if you use <a href> instead
+      btnRef.current.click();
+      history.push("/login")
+    } catch {
+      setError("Failed to log out")
+    }
+
+    
+  }
+
     return (
         <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
   {/* Topbar */}
@@ -181,6 +209,24 @@ const TopBar = (props) => {
 
 </ul>
 {/* End of Topbar */}
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        {error && <div className="alert alert-danger" role="alert">{error}</div>}
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" ref={btnRef} type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="#" onClick={handleLogout}>Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </nav>
 
     );

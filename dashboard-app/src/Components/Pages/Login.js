@@ -26,13 +26,14 @@ const Login = (props) => {
       setError("")
       setLoading(true)
       await login(emailRef.current.value, passwordRef.current.value)
+      console.log(currentUser)
       history.push("/")
     } catch (error) {
       setError("Failed to log in. " + error.message)
     }
 
     setLoading(false)
-    console.log(currentUser)
+    
   }
     return (
         <div className="bg-gradient-primary">
