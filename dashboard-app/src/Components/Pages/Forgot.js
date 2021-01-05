@@ -1,6 +1,38 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
+import { useAuth } from "../../Contexts/AuthContext"
+import { Link, useHistory } from "react-router-dom"
 
 const Forgot = (props) => {
+
+  const emailRef = useRef()
+  const passwordRef = useRef()
+  const { resetPassword, currentUser } = useAuth()
+  const [error, setError] = useState("")
+  const [message, setMessage] = useState("")
+  const [loading, setLoading] = useState(false)
+  const history = useHistory()
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+
+    if (!emailRef.current.value) {
+      return setError("Email is empty")
+    }
+
+    try {
+      setError("")
+      setMessage("")
+      setLoading(true)
+      await resetPassword(emailRef.current.value)
+      setMessage("Check your e-mail for further instructions.")
+    } catch (error) {
+      setError("Failed to reset password. " + error.message)
+    }
+
+    setLoading(false)
+    
+  }
+
     return (
         <div className="bg-gradient-primary">
         <div className="container">
@@ -21,20 +53,22 @@ const Forgot = (props) => {
                         <h1 className="h4 text-gray-900 mb-2">Forgot Your Password?</h1>
                         <p className="mb-4">We get it, stuff happens. Just enter your email address below and we'll send you a link to reset your password!</p>
                       </div>
-                      <form className="user">
+                      {error && <div className="alert alert-danger" role="alert">{error}</div>}
+                      {message && <div className="alert alert-success" role="alert">{message}</div>}
+                      <form className="user" onSubmit={handleSubmit}>
                         <div className="form-group">
-                          <input type="email" className="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..."/>
+                          <input type="email" ref={emailRef} className="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..."/>
                         </div>
-                        <a href="login.html" className="btn btn-primary btn-user btn-block">
+                        <button className="btn btn-primary btn-user btn-block">
                           Reset Password
-                        </a>
+                        </button>
                       </form>
                       <hr />
                       <div className="text-center">
-                        <a className="small" href="register.html">Create an Account!</a>
+                        <Link className="small" href="/register">Create an Account!</Link>
                       </div>
                       <div className="text-center">
-                        <a className="small" href="login.html">Already have an account? Login!</a>
+                        <Link className="small" to="/login">Already have an account? Login!</Link>
                       </div>
                     </div>
                   </div>
