@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 
 import PageHeading from './PageHeading';
 import EarningsMonthly from './EarningsMonthly';
@@ -13,8 +13,19 @@ import Illustrations from './Illustrations';
 import Approach from './Approach';
 import Row from './Row';
 import Column from './Column';
+import { Link, useHistory } from "react-router-dom"
+import { useAuth } from "../../Contexts/AuthContext"
 
 const Dashboard = (props) => {
+
+  const { currentUser } = useAuth()
+  const history = useHistory()
+  
+  useEffect(() => {
+    if (!currentUser) {
+      history.push("/login")
+    }
+  }, [])
 
     return (
         <div className="container-fluid">
