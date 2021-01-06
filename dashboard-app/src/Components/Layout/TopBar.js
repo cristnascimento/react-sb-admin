@@ -9,6 +9,18 @@ const TopBar = (props) => {
   const history = useHistory()
   const btnRef = useRef();
 
+  function writeFirebase () {
+    console.log("hi there")
+    fetch("https://auth-sb-admin-local-default-rtdb.firebaseio.com/meucadastro.js",
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({name: "Cristiano", age: 35})
+    });
+  }
+
   async function handleLogout(event) {
     setError("")
 
@@ -195,7 +207,7 @@ const TopBar = (props) => {
         <i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
         Settings
       </a>
-      <a className="dropdown-item" href="#">
+      <a className="dropdown-item" href="#" onClick={writeFirebase}>
         <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
         Activity Log
       </a>
