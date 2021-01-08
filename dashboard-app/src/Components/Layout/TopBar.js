@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react"
 import { useAuth } from "../../Contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
+import { database } from "../../firebase"
 
 const TopBar = (props) => {
 
@@ -11,14 +12,22 @@ const TopBar = (props) => {
 
   function writeFirebase () {
     console.log("hi there")
-    fetch("https://auth-sb-admin-local-default-rtdb.firebaseio.com/meucadastro.js",
+    let url = "https://auth-sb-admin-local-default-rtdb.firebaseio.com/users/"+currentUser.uid+"/meucadastro.json"
+    database.ref('users/' + currentUser.uid).set({
+      username: 'xzya',
+      email: currentUser.email,
+    });
+    /*
+    console.log("urelela")
+    console.log(url)
+    fetch(url,
     {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({name: "Cristiano", age: 35})
-    });
+    });*/
   }
 
   async function handleLogout(event) {
