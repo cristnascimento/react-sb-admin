@@ -18,6 +18,7 @@ import Charts from './Components/Charts/Charts';
 import Tables from './Components/Tables/Tables';
 import Dashboard2 from './Components/Dashboard2/Dashboard2';
 import { AuthProvider } from './Contexts/AuthContext';
+import Profile from './Components/Profile/Profile';
 
 function App() {
   return (
@@ -40,6 +41,8 @@ function App() {
           <Route path='/blank' component={Blank} /> 
           <Route path='/charts' component={Charts} />
           <Route path='/tables' component={Tables} />
+          <Route path='/profile' component={Profile} />
+
         </Layout>
         </Switch>
       </BrowserRouter>
