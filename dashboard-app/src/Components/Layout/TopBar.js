@@ -1,22 +1,29 @@
 import React, { useRef, useState } from "react"
 import { useAuth } from "../../Contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
-import { database } from "../../firebase"
+//import { database } from "../../firebase"
 
 const TopBar = (props) => {
 
   const [error, setError] = useState("")
-  const { currentUser, logout } = useAuth()
+  const { currentUser, logout, databaseService } = useAuth()
   const history = useHistory()
   const btnRef = useRef();
 
   function writeFirebase () {
     console.log("hi there")
+    databaseService.createContact(currentUser.uid, {
+        username: 'xzyab',
+        email: currentUser.email,
+      }
+    )
+    /*
     let url = "https://auth-sb-admin-local-default-rtdb.firebaseio.com/users/"+currentUser.uid+"/meucadastro.json"
     database.ref('users/' + currentUser.uid).set({
       username: 'xzya',
       email: currentUser.email,
     });
+    */
     /*
     console.log("urelela")
     console.log(url)

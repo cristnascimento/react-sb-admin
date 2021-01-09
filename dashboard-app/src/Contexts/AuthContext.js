@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react"
 import { auth } from "../firebase"
+import { databaseService } from "../Services/FirebaseDatabaseService"
 
 const AuthContext = React.createContext()
 
@@ -53,7 +54,8 @@ export function AuthProvider({ children }) {
     logout,
     resetPassword,
     updateEmail,
-    updatePassword
+    updatePassword,
+    databaseService
   }
 
   return (
