@@ -1,19 +1,28 @@
-Create handle submit contactimport React, { useRef } from 'react';
+import React, { useRef } from 'react';
+import { useAuth } from "../../Contexts/AuthContext"
 
 const Contact = (props) => {
 
+  const { currentUser, databaseService } = useAuth()
   const firstNameRef = useRef()
   const lastNameRef = useRef()
   const emailRef = useRef()
   const mobileRef = useRef()
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
 
     console.log(firstNameRef.current.value)
     console.log(lastNameRef.current.value)
     console.log(emailRef.current.value)
     console.log(mobileRef.current.value)
+
+    await databaseService.createContact(currentUser.uid, {
+          firstName: firstNameRef.current.value,
+          lastName: lastNameRef.current.value,
+          email: emailRef.current.value,
+          mobile: mobileRef.current.value
+    })
   }
     return (
         <div className="card shadow mb-4">
