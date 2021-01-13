@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useAuth } from "../../Contexts/AuthContext"
 
 const Contact = (props) => {
@@ -24,6 +24,14 @@ const Contact = (props) => {
           mobile: mobileRef.current.value
     })
   }
+
+  useEffect(() => {
+    firstNameRef.current.value = 'fake'
+    lastNameRef.current.value = 'news'
+    emailRef.current.value = 'fake@news'
+    mobileRef.current.value = '111'
+  }, [])
+
     return (
         <div className="card shadow mb-4">
           <div className="card-header py-3">
