@@ -12,11 +12,6 @@ const Contact = (props) => {
   const handleSubmit = async (event) => {
     event.preventDefault()
 
-    console.log(firstNameRef.current.value)
-    console.log(lastNameRef.current.value)
-    console.log(emailRef.current.value)
-    console.log(mobileRef.current.value)
-
     await databaseService.createContact(currentUser.uid, {
           firstName: firstNameRef.current.value,
           lastName: lastNameRef.current.value,
@@ -25,11 +20,17 @@ const Contact = (props) => {
     })
   }
 
-  useEffect(() => {
-    firstNameRef.current.value = 'fake'
-    lastNameRef.current.value = 'news'
-    emailRef.current.value = 'fake@news'
-    mobileRef.current.value = '111'
+  const getContact = (contact) => {    
+    firstNameRef.current.value = contact.firstName;
+    lastNameRef.current.value = contact.lastName
+    emailRef.current.value = contact.email
+    mobileRef.current.value = contact.mobile
+  }
+
+  useEffect(async () => {
+    // databaseService.readContact(currentUser.uid, getContact);
+    const contact = await databaseService.readContactSync(currentUser.uid);
+    getContact(contact)
   }, [])
 
     return (
