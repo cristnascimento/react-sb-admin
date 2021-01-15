@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { useAuth } from "../../Contexts/AuthContext"
 
 const Contact = (props) => {
@@ -9,15 +9,27 @@ const Contact = (props) => {
   const emailRef = useRef()
   const mobileRef = useRef()
 
+  const [error, setError] = useState("")
+  const [success, setSuccess] = useState("")
+
   const handleSubmit = async (event) => {
     event.preventDefault()
-
-    await databaseService.createContact(currentUser.uid, {
-          firstName: firstNameRef.current.value,
-          lastName: lastNameRef.current.value,
-          email: emailRef.current.value,
-          mobile: mobileRef.current.value
-    })
+    setError("")
+    setSuccess("")
+    try {
+      await databaseService.createContact(currentUser.uid, {
+            firstName: firstNameRef.current.value,
+            lastName: lastNameRef.current.value,
+            email: emailRef.current.value,
+            mobile: mobileRef.current.value
+      })
+      setSuccess("Os dados foram salvos com sucesso")
+      setTimeout( () => {
+        setSuccess("")
+      }, 3000)
+    } catch (e) {
+      setError(e)
+    }
   }
 
   const getContact = (contact) => {    
@@ -42,6 +54,8 @@ const Contact = (props) => {
             <p>Use Font Awesome Icons (included with this theme package) along with the circle buttons as shown in the examples below!</p>
    
             <form className="user" onSubmit={handleSubmit}>
+            {error && <div className="alert alert-danger" role="alert">{error}</div>}
+            {success && <div className="alert alert-success" role="alert">{success}</div>}
             <div className="form-group row">
                       <div className="col-sm-6 mb-3 mb-sm-0">
                         <input type="text" ref={firstNameRef} className="form-control form-control-user" id="inputFirstName" placeholder="First Name"/>

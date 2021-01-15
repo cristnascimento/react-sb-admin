@@ -3,6 +3,7 @@ import { database } from "../firebase"
 
 const createContact = (userId, content) => {
     database.ref('users/' + userId + '/contact').set(content);
+    //throw "Erro ao salvar dados"
 }
 
 const readContact = (userId, callBack) => {
@@ -16,8 +17,6 @@ const readContact = (userId, callBack) => {
 const readContactSync = async (userId) => {
     var contactRef = database.ref('users/' + userId + '/contact');
     const snapshot = await contactRef.once('value')
-    console.log("read async ==========")
-    console.log(snapshot.val())
     return snapshot.val()
 }
 
