@@ -16,6 +16,27 @@ const Contact = (props) => {
     event.preventDefault()
     setError("")
     setSuccess("")
+
+    if (!firstNameRef.current.value) {
+      setError("First name is empty")
+      return
+    }
+
+    if (!lastNameRef.current.value) {
+      setError("Last name is empty")
+      return
+    }
+
+    if (!emailRef.current.value) {
+      setError("Email is empty")
+      return
+    }
+
+    if (!mobileRef.current.value) {
+      setError("Mobile is empty")
+      return
+    }
+    
     try {
       await databaseService.createContact(currentUser.uid, {
             firstName: firstNameRef.current.value,
