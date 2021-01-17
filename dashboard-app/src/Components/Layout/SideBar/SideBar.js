@@ -36,6 +36,21 @@ const SideBar = (props) => {
         <li className="nav-item">
           <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
             <i className="fas fa-fw fa-cog"></i>
+            <span>Finance</span>
+          </a>
+          <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div className="bg-white py-2 collapse-inner rounded">
+              <h6 className="collapse-header">Finance App</h6>
+              <Link className="collapse-item" to="/buttons">Expenses</Link>
+              <Link className="collapse-item" to="/cards">Incomes</Link>
+            </div>
+          </div>
+        </li>
+
+                {/* Nav Item - Pages Collapse Menu */}
+                <li className="nav-item">
+          <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+            <i className="fas fa-fw fa-cog"></i>
             <span>Components</span>
           </a>
           <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -46,6 +61,7 @@ const SideBar = (props) => {
             </div>
           </div>
         </li>
+
 
         {/* Nav Item - Utilities Collapse Menu */}
         <li className="nav-item">
