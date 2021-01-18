@@ -41,8 +41,8 @@ const SideBar = (props) => {
           <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div className="bg-white py-2 collapse-inner rounded">
               <h6 className="collapse-header">Finance App</h6>
-              <Link className="collapse-item" to="/buttons">Expenses</Link>
-              <Link className="collapse-item" to="/cards">Incomes</Link>
+              <Link className="collapse-item" to="/expenses">Expenses</Link>
+              <Link className="collapse-item" to="/incomes">Incomes</Link>
             </div>
           </div>
         </li>

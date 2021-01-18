@@ -19,6 +19,8 @@ import Tables from './Components/Tables/Tables';
 import Dashboard2 from './Components/Dashboard2/Dashboard2';
 import { AuthProvider } from './Contexts/AuthContext';
 import Profile from './Components/Profile/Profile';
+import Expenses from './Components/Finance/Expenses';
+import Incomes from './Components/Finance/Incomes';
 
 function App() {
   return (
@@ -42,6 +44,8 @@ function App() {
           <Route path='/charts' component={Charts} />
           <Route path='/tables' component={Tables} />
           <Route path='/profile' component={Profile} />
+          <Route path='/expenses' component={Expenses} />
+          <Route path='/incomes' component={Incomes} />
 
         </Layout>
         </Switch>
