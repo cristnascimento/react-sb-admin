@@ -1,5 +1,10 @@
 import React, {useRef, useEffect} from 'react';
 import ScriptTag from 'react-script-tag';
+import Row from '../Dashboard/Row';
+import EarningsMonthly from '../Dashboard/EarningsMonthly';
+import EarningsAnnual from '../Dashboard/EarningsAnnual'
+import Tasks from '../Dashboard/Tasks'
+import PendingRequests from '../Dashboard/PendingRequests'
 
 //import showTable from './datatables-demo';
 
@@ -32,6 +37,13 @@ const Expenses = (props) => {
         {/* Page Heading */}
         <h1 className="h3 mb-2 text-gray-800">Tables</h1>
         <p className="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
+
+        <Row>
+            <EarningsMonthly/>
+            <EarningsAnnual/>
+            <Tasks/>
+            <PendingRequests/>
+          </Row>
 
         {/* DataTales Example */}
         <div className="card shadow mb-4">
