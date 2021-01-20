@@ -56,9 +56,9 @@ const Expenses = (props) => {
         {/* DataTales Example */}
         <div className="card shadow mb-4">
           <div className="card-header py-3">
-          <div className="d-sm-flex align-items-center justify-content-between mb-4">
+          <div className="d-sm-flex align-items-center justify-content-between">
             <h6 className="m-0 font-weight-bold text-primary">DataTables Example</h6>
-            
+            <a href="#" className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i className="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
           </div>
           </div>
           <div className="card-body">
