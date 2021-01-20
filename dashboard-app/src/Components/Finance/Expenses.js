@@ -35,9 +35,17 @@ const Expenses = (props) => {
       {/* Begin Page Content */}
       
         {/* Page Heading */}
-        <h1 className="h3 mb-2 text-gray-800">Tables</h1>
-        <p className="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
 
+        <div className="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 className="h3 mb-0 text-gray-800">Expenses</h1>
+            <a href="#" className="btn btn-success btn-icon-split">
+            <span className="icon text-white-50">
+              <i className="fas fa-plus"></i>
+            </span>
+            <span className="text">New Expense</span>
+          </a>
+        </div>
+        <p className="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
         <Row>
             <EarningsMonthly/>
             <EarningsAnnual/>
@@ -48,7 +56,10 @@ const Expenses = (props) => {
         {/* DataTales Example */}
         <div className="card shadow mb-4">
           <div className="card-header py-3">
+          <div className="d-sm-flex align-items-center justify-content-between mb-4">
             <h6 className="m-0 font-weight-bold text-primary">DataTables Example</h6>
+            
+          </div>
           </div>
           <div className="card-body">
             <div className="table-responsive">
