@@ -38,7 +38,7 @@ const Expenses = (props) => {
 
         <div className="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 className="h3 mb-0 text-gray-800">Expenses</h1>
-            <a href="#" className="btn btn-success btn-icon-split">
+            <a href="#" className="btn btn-success btn-icon-split " data-toggle="modal" data-target="#exampleModal">
             <span className="icon text-white-50">
               <i className="fas fa-plus"></i>
             </span>
@@ -46,6 +46,26 @@ const Expenses = (props) => {
           </a>
         </div>
         <p className="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
+        {/* Modal */}
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
         <Row>
             <EarningsMonthly/>
             <EarningsAnnual/>
