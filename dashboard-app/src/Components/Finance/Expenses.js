@@ -10,7 +10,13 @@ import PendingRequests from '../Dashboard/PendingRequests'
 
 const Expenses = (props) => {
 
-    const tableRef = useRef(null);
+  const firstNameRef = useRef()
+  const lastNameRef = useRef()
+  const emailRef = useRef()
+  const mobileRef = useRef()
+  const tableRef = useRef(null);
+
+  const handleSubmit = async (event) => {}
 
     const dt = () => {
         return (
@@ -51,13 +57,29 @@ const Expenses = (props) => {
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">New Expense</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        ...
+      <form className="user" onSubmit={handleSubmit}>
+            
+            <div className="form-group row">
+                      <div className="col-sm-6 mb-3 mb-sm-0">
+                        <input type="text" ref={firstNameRef} className="form-control form-control-user" id="inputFirstName" placeholder="First Name"/>
+                      </div>
+                      <div className="col-sm-6">
+                        <input type="text" ref={lastNameRef} className="form-control form-control-user" id="inputLastName" placeholder="Last Name"/>
+                      </div>
+                    </div>
+                        <div className="form-group">
+                          <input type="email" ref={emailRef} className="form-control form-control-user" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..."/>
+                        </div>
+                        <div className="form-group">
+                          <input type="text" ref={mobileRef} className="form-control form-control-user" id="inputMobile" aria-describedby="emailHelp" placeholder="Enter Phone Number +55 31 99988-7755..."/>
+                        </div>
+            </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
