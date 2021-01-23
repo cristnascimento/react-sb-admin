@@ -1,4 +1,4 @@
-import React, {useRef, useEffect} from 'react';
+import React, {useRef, useEffect, useState} from 'react';
 import ScriptTag from 'react-script-tag';
 import Row from '../Dashboard/Row';
 import EarningsMonthly from '../Dashboard/EarningsMonthly';
@@ -9,6 +9,8 @@ import PendingRequests from '../Dashboard/PendingRequests'
 //import showTable from './datatables-demo';
 
 const Expenses = (props) => {
+
+  const [expenses, setExpenses] = useState([])
 
   const firstNameRef = useRef()
   const lastNameRef = useRef()
@@ -35,6 +37,28 @@ const Expenses = (props) => {
           //setChartInstance(newChartInstance);
         }
       }, [tableRef]);
+
+      useEffect(() => {
+
+          let newExpenses = [
+            {
+              id: 1,
+              name: 'Tiger Nixon',
+              position: 'System Architect',
+              office: 'Edinburgh',
+              age: '61',
+              startDate: '2011/04/25',
+              salary: '$320,800'
+            }
+          ]
+          console.log("newexpenses")
+          setExpenses(newExpenses)
+          console.log(expenses)
+      }, []);
+
+      useEffect(() => {
+        console.log(expenses)
+    }, [expenses]);
 
     return (
       <div className="container-fluid">
@@ -127,6 +151,18 @@ const Expenses = (props) => {
                   </tr>
                 </tfoot>
                 <tbody>
+                  {
+                    expenses.map(item =>
+                      <tr key={item.id}>
+                      <td>{item.name}</td>
+                      <td>{item.position}</td>
+                      <td>{item.office}</td>
+                      <td>{item.age}</td>
+                      <td>{item.startDate}</td>
+                      <td>{item.salary}</td>
+                      </tr>    
+                    )
+                  }
                   <tr>
                     <td>Tiger Nixon</td>
                     <td>System Architect</td>
