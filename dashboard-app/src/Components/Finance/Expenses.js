@@ -91,6 +91,18 @@ const Expenses = (props) => {
                         <div className="form-group">
                           <input type="text" ref={mobileRef} className="form-control form-control-user" id="inputMobile" aria-describedby="emailHelp" placeholder="Enter Phone Number +55 31 99988-7755..."/>
                         </div>
+                        
+                        <div className="form-group row">
+                        <div className="col-sm-6 mb-3 mb-sm-0">
+                        <label for="cars">Choose a car:</label>
+<select name="cars" id="cars" className="form-control form-control-expenses" value="volvo">
+  <option value="volvo">Volvo</option>
+  <option value="saab">Saab</option>
+  <option value="mercedes">Mercedes</option>
+  <option value="audi">Audi</option>
+</select>
+</div>
+</div>
             </form>
       </div>
       <div class="modal-footer">
