@@ -77,7 +77,23 @@ const Expenses = (props) => {
       <div class="modal-body">
       <form className="user" onSubmit={handleSubmit}>
             
+      <div className="form-group row">
+                          <div className="col-sm-6 mb-3 mb-sm-0">
+                          
+                          <select name="cars" id="cars" className="form-control form-control-expenses" defaultValue="supermercado">
+                              <option value="supermercado">Supermercado</option>
+                                <option value="fixa">Contas Fixas</option>
+                                <option value="sacolao">Sacolão</option>
+                                <option value="shopping">Shopping</option>
+                          </select>
+                          </div>
+                          <div className="col-sm-6 mb-3 mb-sm-0">
+                          
+                          <input type="date" defaultValue='2020-08-01' className="form-control form-control-expenses"/>
+                          </div>
+                      </div>
             <div className="form-group row">
+              
                       <div className="col-sm-6 mb-3 mb-sm-0">
                         <input type="text" ref={firstNameRef} className="form-control form-control-user" id="inputFirstName" placeholder="First Name"/>
                       </div>
@@ -92,17 +108,7 @@ const Expenses = (props) => {
                           <input type="text" ref={mobileRef} className="form-control form-control-user" id="inputMobile" aria-describedby="emailHelp" placeholder="Enter Phone Number +55 31 99988-7755..."/>
                         </div>
                         
-                        <div className="form-group row">
-                        <div className="col-sm-6 mb-3 mb-sm-0">
-                        <label for="cars">Choose a car:</label>
-<select name="cars" id="cars" className="form-control form-control-expenses" value="volvo">
-  <option value="volvo">Volvo</option>
-  <option value="saab">Saab</option>
-  <option value="mercedes">Mercedes</option>
-  <option value="audi">Audi</option>
-</select>
-</div>
-</div>
+                        
             </form>
       </div>
       <div class="modal-footer">
