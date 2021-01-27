@@ -13,13 +13,19 @@ const Expenses = (props) => {
 
   const [expenses, setExpenses] = useState([])
 
-  const firstNameRef = useRef()
-  const lastNameRef = useRef()
-  const emailRef = useRef()
-  const mobileRef = useRef()
+  const categoryRef = useRef()
+  const dateRef = useRef()
+  const descriptionRef = useRef()
+  const valueRef = useRef();
   const tableRef = useRef(null);
 
-  const handleSubmit = async (event) => {}
+  const handleSubmit = async (event) => {
+    console.log("submitted")
+    console.log("category: " + categoryRef.current.value)
+    console.log("date: " + dateRef.current.value)
+    console.log("description: " + descriptionRef.current.value)
+    console.log("value: " + valueRef.current.value)
+  }
 
     const dt = () => {
         return (
@@ -75,12 +81,12 @@ const Expenses = (props) => {
         </button>
       </div>
       <div class="modal-body">
-      <form className="user" onSubmit={handleSubmit}>
+      <form className="user" >
             
       <div className="form-group row">
                           <div className="col-sm-6 mb-3 mb-sm-0">
                           
-                          <select name="cars" id="cars" className="form-control form-control-expenses" defaultValue="supermercado">
+                          <select name="cars" ref={categoryRef} id="cars" className="form-control form-control-expenses" defaultValue="supermercado">
                               <option value="supermercado">Supermercado</option>
                                 <option value="fixa">Contas Fixas</option>
                                 <option value="sacolao">Sacolão</option>
@@ -89,23 +95,14 @@ const Expenses = (props) => {
                           </div>
                           <div className="col-sm-6 mb-3 mb-sm-0">
                           
-                          <input type="date" defaultValue='2020-08-01' className="form-control form-control-expenses"/>
+                          <input type="date" ref={dateRef} defaultValue='2020-08-01' className="form-control form-control-expenses"/>
                           </div>
                       </div>
-            <div className="form-group row">
-              
-                      <div className="col-sm-6 mb-3 mb-sm-0">
-                        <input type="text" ref={firstNameRef} className="form-control form-control-user" id="inputFirstName" placeholder="First Name"/>
-                      </div>
-                      <div className="col-sm-6">
-                        <input type="text" ref={lastNameRef} className="form-control form-control-user" id="inputLastName" placeholder="Last Name"/>
-                      </div>
-                    </div>
                         <div className="form-group">
-                          <input type="email" ref={emailRef} className="form-control form-control-user" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..."/>
+                          <input type="text" ref={descriptionRef} className="form-control form-control-user" id="inputDescription" aria-describedby="emailHelp" placeholder="Description..."/>
                         </div>
                         <div className="form-group">
-                          <input type="text" ref={mobileRef} className="form-control form-control-user" id="inputMobile" aria-describedby="emailHelp" placeholder="Enter Phone Number +55 31 99988-7755..."/>
+                          <input type="text" ref={valueRef} className="form-control form-control-user" id="inputValue" aria-describedby="emailHelp" placeholder="R$0,00 ..."/>
                         </div>
                         
                         
@@ -113,7 +110,7 @@ const Expenses = (props) => {
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" onClick={handleSubmit}>Save changes</button>
       </div>
     </div>
   </div>
