@@ -6,13 +6,19 @@ import EarningsAnnual from '../Dashboard/EarningsAnnual'
 import Tasks from '../Dashboard/Tasks'
 import PendingRequests from '../Dashboard/PendingRequests'
 import { expensesData } from './ExpensesData'
+import { useAuth } from "../../Contexts/AuthContext"
 
 //import showTable from './datatables-demo';
 
 const Expenses = (props) => {
 
-  const [expenses, setExpenses] = useState([])
+  const { currentUser, databaseService } = useAuth()
 
+  const [expenses, setExpenses] = useState([])
+  const [error, setError] = useState("")
+  const [success, setSuccess] = useState("")
+
+  const idRef = useRef()
   const categoryRef = useRef()
   const dateRef = useRef()
   const descriptionRef = useRef()
@@ -20,11 +26,52 @@ const Expenses = (props) => {
   const tableRef = useRef(null);
 
   const handleSubmit = async (event) => {
-    console.log("submitted")
-    console.log("category: " + categoryRef.current.value)
-    console.log("date: " + dateRef.current.value)
-    console.log("description: " + descriptionRef.current.value)
-    console.log("value: " + valueRef.current.value)
+    event.preventDefault()
+    setError("")
+    setSuccess("")
+
+    if (!categoryRef.current.value) {
+      setError("Category is empty")
+      return
+    }
+
+    if (!dateRef.current.value) {
+      setError("Date is empty")
+      return
+    }
+
+    if (!descriptionRef.current.value) {
+      setError("Description is empty")
+      return
+    }
+
+    if (!valueRef.current.value) {
+      setError("Value is empty")
+      return
+    }
+    
+    try {
+      let newId = await databaseService.createExpense(currentUser.uid, {
+            year: "2020",
+            month: "01",
+            id: idRef && idRef.current.value,
+            data: {
+            category: categoryRef.current.value,
+            date: dateRef.current.value,
+            description: descriptionRef.current.value,
+            value: valueRef.current.value
+            }
+      })
+      if (newId) {
+        idRef.current.value = newId;
+      }
+      setSuccess("Os dados foram salvos com sucesso. New id is: " + newId)
+      setTimeout( () => {
+        setSuccess("")
+      }, 3000)
+    } catch (e) {
+      setError(e)
+    }
   }
 
     const dt = () => {
@@ -82,7 +129,9 @@ const Expenses = (props) => {
       </div>
       <div class="modal-body">
       <form className="user" >
-            
+      {error && <div className="alert alert-danger" role="alert">{error}</div>}
+      {success && <div className="alert alert-success" role="alert">{success}</div>}
+      <input type="hidden" ref={idRef}/>
       <div className="form-group row">
                           <div className="col-sm-6 mb-3 mb-sm-0">
                           
