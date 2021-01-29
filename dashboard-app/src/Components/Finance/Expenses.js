@@ -92,9 +92,20 @@ const Expenses = (props) => {
         }
       }, [tableRef]);
 
-      useEffect(() => {
-    
-          setExpenses(expensesData)
+      useEffect( () => {
+        async function init() {
+          var data = await databaseService.getExpenses(currentUser.uid, {year: '2020', month: '01'});
+          console.log('=======> helloooooooo')
+          console.log(data)
+          console.log('=======> size ' +data.length)
+          console.log('=======> helloooooooo')
+          setExpenses(data)
+
+        }
+        init();
+          //setExpenses(contact)
+          //setExpenses(expensesData)
+          //setExpenses([])
       }, []);
 
       useEffect(() => {
@@ -203,16 +214,16 @@ const Expenses = (props) => {
                   </tr>
                 </tfoot>
                 <tbody>
-                  {
+                  { expenses.length > 0 &&
                     expenses.map(item =>
-                      <tr key={item.id}>
-                      <td>{item.name}</td>
-                      <td>{item.position}</td>
-                      <td>{item.office}</td>
-                      <td>{item.age}</td>
-                      <td>{item.startDate}</td>
-                      <td>{item.salary}</td>
-                      </tr>    
+                    <tr key={item.category}>
+                      <td>{item.value}</td>
+                      <td>{item.description}</td>
+                      <td>{item.date}</td>
+                      <td>111</td>
+                      <td>asdfa</td>
+                      <td>salar</td>
+                      </tr>
                     )
                   }
                  

@@ -24,6 +24,15 @@ const readContact = (userId, callBack) => {
     });
 }
 
+const getExpenses = async (userId, content, callBack) => {
+    var url = 'users/' + userId + '/expenses/' + content.year + '/' + content.month
+    console.log("====url: " + url)
+    var contactRef = database.ref(url)
+    const snapshot = await contactRef.once('value')
+    console.log(snapshot.val())
+    return Object.values(snapshot.val())
+}
+
 const readContactSync = async (userId) => {
     var contactRef = database.ref('users/' + userId + '/contact');
     const snapshot = await contactRef.once('value')
@@ -34,6 +43,7 @@ export const databaseService = {
     createExpense,
     createContact,
     readContact,
-    readContactSync
+    readContactSync,
+    getExpenses
 
 }
