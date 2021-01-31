@@ -24,13 +24,22 @@ const readContact = (userId, callBack) => {
     });
 }
 
-const getExpenses = async (userId, content, callBack) => {
+const getExpenses = async (userId, content) => {
     var url = 'users/' + userId + '/expenses/' + content.year + '/' + content.month
     console.log("====url: " + url)
     var contactRef = database.ref(url)
     const snapshot = await contactRef.once('value')
     console.log(snapshot.val())
-    return Object.values(snapshot.val())
+    var temp = snapshot.val()
+    var temp_keys = Object.keys(temp)
+    var values_to_return = temp_keys.map(key => {
+        return {
+            id: key,
+            ...temp[key]
+        }
+    })
+    return values_to_return
+    //return Object.values(snapshot.val())
 }
 
 const readContactSync = async (userId) => {
