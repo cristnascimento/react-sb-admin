@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react"
 import { database } from "../firebase"
 
 const createExpense = async (userId, content) => {
-    if (content.id) {
-        await database.ref('users/' + userId + '/expenses/' + content.year + '/' + content.month + '/' + content.id).set(content.data);
-    } else {
         let ref = await database.ref('users/' + userId + '/expenses/' + content.year + '/' + content.month).push(content.data);
         return ref.key;
-    }
-    //throw "Erro ao salvar dados"
+}
+
+const updateExpense = async (userId, expenseId, content) => {
+        await database.ref("users/" + userId + "/expenses/" + content.year + "/" + content.month + "/" + expenseId)
+          .set(content.data);
 }
 
 const createContact = (userId, content) => {
@@ -50,6 +50,7 @@ const readContactSync = async (userId) => {
 
 export const databaseService = {
     createExpense,
+    updateExpense,
     createContact,
     readContact,
     readContactSync,
