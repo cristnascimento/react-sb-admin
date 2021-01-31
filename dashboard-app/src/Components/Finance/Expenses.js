@@ -1,242 +1,312 @@
-import React, {useRef, useEffect, useState} from 'react';
-import ScriptTag from 'react-script-tag';
-import Row from '../Dashboard/Row';
-import EarningsMonthly from '../Dashboard/EarningsMonthly';
-import EarningsAnnual from '../Dashboard/EarningsAnnual'
-import Tasks from '../Dashboard/Tasks'
-import PendingRequests from '../Dashboard/PendingRequests'
-import { expensesData } from './ExpensesData'
-import { useAuth } from "../../Contexts/AuthContext"
+import React, { useRef, useEffect, useState } from "react";
+import ScriptTag from "react-script-tag";
+import Row from "../Dashboard/Row";
+import EarningsMonthly from "../Dashboard/EarningsMonthly";
+import EarningsAnnual from "../Dashboard/EarningsAnnual";
+import Tasks from "../Dashboard/Tasks";
+import PendingRequests from "../Dashboard/PendingRequests";
+import { expensesData } from "./ExpensesData";
+import { useAuth } from "../../Contexts/AuthContext";
 
-//import showTable from './datatables-demo';
+//import 'bootstrap/dist/css/bootstrap.min.css';
+import "jquery/dist/jquery.min.js";
+//import "datatables.net-dt/js/dataTables.dataTables"
+//import "datatables.net-dt/css/jquery.dataTables.min.css"
+
+import "../../vendor/datatables/jquery.dataTables.min.js";
+import "../../vendor/datatables/dataTables.bootstrap4.min.js";
+import "../../vendor/datatables/dataTables.bootstrap4.min.css";
+
+import $ from "jquery";
 
 const Expenses = (props) => {
+  const { currentUser, databaseService } = useAuth();
 
-  const { currentUser, databaseService } = useAuth()
+  const [expenses, setExpenses] = useState([]);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
-  const [expenses, setExpenses] = useState([])
-  const [error, setError] = useState("")
-  const [success, setSuccess] = useState("")
-
-  const idRef = useRef()
-  const categoryRef = useRef()
-  const dateRef = useRef()
-  const descriptionRef = useRef()
+  const idRef = useRef();
+  const categoryRef = useRef();
+  const dateRef = useRef();
+  const descriptionRef = useRef();
   const valueRef = useRef();
   const tableRef = useRef(null);
 
   const handleSubmit = async (event) => {
-    event.preventDefault()
-    setError("")
-    setSuccess("")
+    event.preventDefault();
+    setError("");
+    setSuccess("");
 
     if (!categoryRef.current.value) {
-      setError("Category is empty")
-      return
+      setError("Category is empty");
+      return;
     }
 
     if (!dateRef.current.value) {
-      setError("Date is empty")
-      return
+      setError("Date is empty");
+      return;
     }
 
     if (!descriptionRef.current.value) {
-      setError("Description is empty")
-      return
+      setError("Description is empty");
+      return;
     }
 
     if (!valueRef.current.value) {
-      setError("Value is empty")
-      return
+      setError("Value is empty");
+      return;
     }
-    
+
     try {
       let newId = await databaseService.createExpense(currentUser.uid, {
-            year: "2020",
-            month: "01",
-            id: idRef && idRef.current.value,
-            data: {
-            category: categoryRef.current.value,
-            date: dateRef.current.value,
-            description: descriptionRef.current.value,
-            value: valueRef.current.value
-            }
-      })
+        year: "2020",
+        month: "01",
+        id: idRef && idRef.current.value,
+        data: {
+          category: categoryRef.current.value,
+          date: dateRef.current.value,
+          description: descriptionRef.current.value,
+          value: valueRef.current.value,
+        },
+      });
       if (newId) {
         idRef.current.value = newId;
       }
-      setSuccess("Os dados foram salvos com sucesso. New id is: " + newId)
-      setTimeout( () => {
-        setSuccess("")
-      }, 3000)
+      setSuccess("Os dados foram salvos com sucesso. New id is: " + newId);
+      setTimeout(() => {
+        setSuccess("");
+      }, 3000);
     } catch (e) {
-      setError(e)
+      setError(e);
     }
-  }
+  };
 
-    const dt = () => {
-        return (
-            <div>
-            <ScriptTag type="text/javascript" src="vendor/datatables/jquery.dataTables.min.js"/>
-            <ScriptTag type="text/javascript" src="vendor/datatables/dataTables.bootstrap4.min.js"/>
-            <ScriptTag type="text/javascript" src="js/demo/datatables-demo.js"/>
-              </div>
-        );
-    }
+  useEffect(() => {
+    const initDataTable = async () => {
+      var data = await databaseService.getExpenses(currentUser.uid, {
+        year: "2020",
+        month: "01",
+      });
+      console.log("=======> helloooooooo");
+      console.log(data);
+      console.log("=======> size " + data.length);
+      console.log("=======> helloooooooo");
+      $("#dataTable").DataTable().destroy();
+      setExpenses(data);
+      $("#dataTable").DataTable();
+    };
+    initDataTable();
+  }, []);
 
-    useEffect(() => {
-        if (tableRef && tableRef.current) {
-           // showTable();
-          //const newChartInstance = new Chart(chartContainer.current, chartConfig);
-          //setChartInstance(newChartInstance);
-        }
-      }, [tableRef]);
+  useEffect(() => {
+    console.log("===========> expenses");
+    console.log(expenses);
+  }, [expenses]);
 
-      useEffect( () => {
-        async function init() {
-          var data = await databaseService.getExpenses(currentUser.uid, {year: '2020', month: '01'});
-          console.log('=======> helloooooooo')
-          console.log(data)
-          console.log('=======> size ' +data.length)
-          console.log('=======> helloooooooo')
-          setExpenses(data)
-
-        }
-        init();
-          //setExpenses(contact)
-          //setExpenses(expensesData)
-          //setExpenses([])
-      }, []);
-
-      useEffect(() => {
-        console.log(expenses)
-    }, [expenses]);
-
-    return (
-      <div className="container-fluid">
+  return (
+    <div className="container-fluid">
       {/* Begin Page Content */}
-      
-        {/* Page Heading */}
 
-        <div className="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 className="h3 mb-0 text-gray-800">Expenses</h1>
-            <a href="#" className="btn btn-success btn-icon-split " data-toggle="modal" data-target="#exampleModal">
-            <span className="icon text-white-50">
-              <i className="fas fa-plus"></i>
-            </span>
-            <span className="text">New Expense</span>
-          </a>
+      {/* Page Heading */}
+
+      <div className="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 className="h3 mb-0 text-gray-800">Expenses</h1>
+        <a
+          href="#"
+          className="btn btn-success btn-icon-split "
+          data-toggle="modal"
+          data-target="#exampleModal"
+        >
+          <span className="icon text-white-50">
+            <i className="fas fa-plus"></i>
+          </span>
+          <span className="text">New Expense</span>
+        </a>
+      </div>
+      <p className="mb-4">
+        DataTables is a third party plugin that is used to generate the demo
+        table below. For more information about DataTables, please visit the{" "}
+        <a target="_blank" href="https://datatables.net">
+          official DataTables documentation
+        </a>
+        .
+      </p>
+      {/* Modal */}
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">
+                New Expense
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form className="user">
+                {error && (
+                  <div className="alert alert-danger" role="alert">
+                    {error}
+                  </div>
+                )}
+                {success && (
+                  <div className="alert alert-success" role="alert">
+                    {success}
+                  </div>
+                )}
+                <input type="hidden" ref={idRef} />
+                <div className="form-group row">
+                  <div className="col-sm-6 mb-3 mb-sm-0">
+                    <select
+                      name="cars"
+                      ref={categoryRef}
+                      id="cars"
+                      className="form-control form-control-expenses"
+                      defaultValue="supermercado"
+                    >
+                      <option value="supermercado">Supermercado</option>
+                      <option value="fixa">Contas Fixas</option>
+                      <option value="sacolao">Sacolão</option>
+                      <option value="shopping">Shopping</option>
+                    </select>
+                  </div>
+                  <div className="col-sm-6 mb-3 mb-sm-0">
+                    <input
+                      type="date"
+                      ref={dateRef}
+                      defaultValue="2020-08-01"
+                      className="form-control form-control-expenses"
+                    />
+                  </div>
+                </div>
+                <div className="form-group">
+                  <input
+                    type="text"
+                    ref={descriptionRef}
+                    className="form-control form-control-user"
+                    id="inputDescription"
+                    aria-describedby="emailHelp"
+                    placeholder="Description..."
+                  />
+                </div>
+                <div className="form-group">
+                  <input
+                    type="text"
+                    ref={valueRef}
+                    className="form-control form-control-user"
+                    id="inputValue"
+                    aria-describedby="emailHelp"
+                    placeholder="R$0,00 ..."
+                  />
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                onClick={handleSubmit}
+              >
+                Save changes
+              </button>
+            </div>
+          </div>
         </div>
-        <p className="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
-        {/* Modal */}
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">New Expense</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
       </div>
-      <div class="modal-body">
-      <form className="user" >
-      {error && <div className="alert alert-danger" role="alert">{error}</div>}
-      {success && <div className="alert alert-success" role="alert">{success}</div>}
-      <input type="hidden" ref={idRef}/>
-      <div className="form-group row">
-                          <div className="col-sm-6 mb-3 mb-sm-0">
-                          
-                          <select name="cars" ref={categoryRef} id="cars" className="form-control form-control-expenses" defaultValue="supermercado">
-                              <option value="supermercado">Supermercado</option>
-                                <option value="fixa">Contas Fixas</option>
-                                <option value="sacolao">Sacolão</option>
-                                <option value="shopping">Shopping</option>
-                          </select>
-                          </div>
-                          <div className="col-sm-6 mb-3 mb-sm-0">
-                          
-                          <input type="date" ref={dateRef} defaultValue='2020-08-01' className="form-control form-control-expenses"/>
-                          </div>
-                      </div>
-                        <div className="form-group">
-                          <input type="text" ref={descriptionRef} className="form-control form-control-user" id="inputDescription" aria-describedby="emailHelp" placeholder="Description..."/>
-                        </div>
-                        <div className="form-group">
-                          <input type="text" ref={valueRef} className="form-control form-control-user" id="inputValue" aria-describedby="emailHelp" placeholder="R$0,00 ..."/>
-                        </div>
-                        
-                        
-            </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onClick={handleSubmit}>Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-        <Row>
-            <EarningsMonthly/>
-            <EarningsAnnual/>
-            <Tasks/>
-            <PendingRequests/>
-          </Row>
+      <Row>
+        <EarningsMonthly />
+        <EarningsAnnual />
+        <Tasks />
+        <PendingRequests />
+      </Row>
 
-        {/* DataTales Example */}
-        <div className="card shadow mb-4">
-          <div className="card-header py-3">
+      {/* DataTales Example */}
+      <div className="card shadow mb-4">
+        <div className="card-header py-3">
           <div className="d-sm-flex align-items-center justify-content-between">
-            <h6 className="m-0 font-weight-bold text-primary">DataTables Example</h6>
-            <a href="#" className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i className="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+            <h6 className="m-0 font-weight-bold text-primary">
+              DataTables Example
+            </h6>
+            <a
+              href="#"
+              className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
+            >
+              <i className="fas fa-download fa-sm text-white-50"></i> Generate
+              Report
+            </a>
           </div>
-          </div>
-          <div className="card-body">
-            <div className="table-responsive">
-              <table className="table table-bordered" id="dataTable" ref={tableRef} width="100%" cellSpacing="0">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Position</th>
-                    <th>Office</th>
-                    <th>Age</th>
-                    <th>Start date</th>
-                    <th>Salary</th>
-                  </tr>
-                </thead>
-                <tfoot>
-                  <tr>
-                    <th>Name</th>
-                    <th>Position</th>
-                    <th>Office</th>
-                    <th>Age</th>
-                    <th>Start date</th>
-                    <th>Salary</th>
-                  </tr>
-                </tfoot>
-                <tbody>
-                  { expenses.length > 0 &&
-                    expenses.map(item =>
-                    <tr key={item.category}>
+        </div>
+        <div className="card-body">
+          <div className="table-responsive">
+            <table
+              className="table table-bordered"
+              id="dataTable"
+              ref={tableRef}
+              width="100%"
+              cellSpacing="0"
+            >
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Position</th>
+                  <th>Office</th>
+                  <th>Age</th>
+                  <th>Start date</th>
+                  <th>Salary</th>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <th>Name</th>
+                  <th>Position</th>
+                  <th>Office</th>
+                  <th>Age</th>
+                  <th>Start date</th>
+                  <th>Salary</th>
+                </tr>
+              </tfoot>
+              <tbody>
+                {expenses.length > 0 &&
+                  expenses.map((item) => (
+                    <tr key={item.id}>
+                      <td>{item.id}</td>
+                      <td>{item.category}</td>
                       <td>{item.value}</td>
                       <td>{item.description}</td>
                       <td>{item.date}</td>
                       <td>111</td>
-                      <td>asdfa</td>
-                      <td>salar</td>
-                      </tr>
-                    )
-                  }
-                 
-                </tbody>
-              </table>
-            </div>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
           </div>
         </div>
-
-        <ScriptTag type="text/javascript" src="js/demo/datatables-demo.js"/>
-      {/* /.container-fluid */}
       </div>
-    );
-}
+
+      {/* /.container-fluid */}
+    </div>
+  );
+};
 
 export default Expenses;
