@@ -59,27 +59,44 @@ const Expenses = (props) => {
     }
 
     try {
+      let data = {
+        category: categoryRef.current.value,
+        date: dateRef.current.value,
+        description: descriptionRef.current.value,
+        value: valueRef.current.value,
+      };
+
       let theexpense = {
         year: "2020",
         month: "01",
-        data: {
-          category: categoryRef.current.value,
-          date: dateRef.current.value,
-          description: descriptionRef.current.value,
-          value: valueRef.current.value,
-        }
+        data  
       }
 
       if (idRef.current.value) {
         console.log("UPDATE: " + idRef.current.value)
         console.log(theexpense)
         await databaseService.updateExpense(currentUser.uid, idRef.current.value, theexpense);
+        let updatedExpenses = expenses.map(item =>
+          item.id === idRef.current.value ? 
+          {
+            id: idRef.current.value,
+            ...data
+          } : item)
+        setExpenses(updatedExpenses)
         setSuccess("Os dados foram atualizados com sucesso.");
       } else {
         console.log("CREATE" )
         console.log(theexpense)
         let newId = await databaseService.createExpense(currentUser.uid, theexpense);
         idRef.current.value = newId;
+        let newExpenses = [
+          ...expenses,
+          {
+            id: newId,
+            ...data
+          }
+        ]
+        setExpenses(newExpenses)  
         setSuccess("Os dados foram salvos com sucesso. New id is: " + idRef.current.value);
       }
       
