@@ -82,7 +82,9 @@ const Expenses = (props) => {
             id: idRef.current.value,
             ...data
           } : item)
+        $("#dataTable").DataTable().destroy();
         setExpenses(updatedExpenses)
+        $("#dataTable").DataTable();
         setSuccess("Os dados foram atualizados com sucesso.");
       } else {
         console.log("CREATE" )
@@ -96,7 +98,9 @@ const Expenses = (props) => {
             ...data
           }
         ]
-        setExpenses(newExpenses)  
+        $("#dataTable").DataTable().destroy();
+        setExpenses(newExpenses);
+        $("#dataTable").DataTable();
         setSuccess("Os dados foram salvos com sucesso. New id is: " + idRef.current.value);
       }
       
@@ -107,6 +111,14 @@ const Expenses = (props) => {
       setError(e);
     }
   };
+
+  const cleanRefs = () => {
+    idRef.current.value = '';
+    categoryRef.current.value = 'supermercado';
+    dateRef.current.value = '2021-02-01';
+    descriptionRef.current.value = '';
+    valueRef.current.value = '';
+  }
 
   useEffect(() => {
     const initDataTable = async () => {
@@ -143,6 +155,7 @@ const Expenses = (props) => {
           className="btn btn-success btn-icon-split "
           data-toggle="modal"
           data-target="#exampleModal"
+          onClick={cleanRefs}
         >
           <span className="icon text-white-50">
             <i className="fas fa-plus"></i>
@@ -321,7 +334,18 @@ const Expenses = (props) => {
                       <td>{item.value}</td>
                       <td>{item.description}</td>
                       <td>{item.date}</td>
-                      <td>111</td>
+                      <td>
+                      <div className="dropdown mb-0">
+            <button className="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Action
+            </button>
+            <div className="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
+              <a className="dropdown-item" href="#">Action</a>
+              <a className="dropdown-item" href="#">Another action</a>
+              <a className="dropdown-item" href="#">Something else here</a>
+            </div>
+          </div>
+          </td>
                     </tr>
                   ))}
               </tbody>
