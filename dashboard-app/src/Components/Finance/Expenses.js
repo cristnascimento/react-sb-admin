@@ -120,6 +120,17 @@ const Expenses = (props) => {
     valueRef.current.value = '';
   }
 
+  const handleEdit = (event, id) => {
+    event.preventDefault()
+    cleanRefs();
+    let selectedItem = expenses.find(item => item.id === id)
+    idRef.current.value = id;
+    categoryRef.current.value = selectedItem.category;
+    dateRef.current.value = selectedItem.date;
+    descriptionRef.current.value = selectedItem.description;
+    valueRef.current.value = selectedItem.value;
+  }
+
   useEffect(() => {
     const initDataTable = async () => {
       var data = await databaseService.getExpenses(currentUser.uid, {
@@ -337,7 +348,7 @@ const Expenses = (props) => {
               Action
             </button>
             <div className="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
-              <a className="dropdown-item" href="#">Action</a>
+              <a className="dropdown-item" data-toggle="modal" data-target="#exampleModal" onClick={(e) => handleEdit(e, item.id)} href="#">Edit</a>
               <a className="dropdown-item" href="#">Another action</a>
               <a className="dropdown-item" href="#">Something else here</a>
             </div>
