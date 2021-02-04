@@ -307,36 +307,33 @@ const Expenses = (props) => {
             >
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Position</th>
-                  <th>Office</th>
-                  <th>Age</th>
                   <th>Start date</th>
-                  <th>Salary</th>
+                  <th>Category</th>
+                  <th>Description</th>
+                  <th>Value</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tfoot>
                 <tr>
-                  <th>Name</th>
-                  <th>Position</th>
-                  <th>Office</th>
-                  <th>Age</th>
                   <th>Start date</th>
-                  <th>Salary</th>
+                  <th>Category</th>
+                  <th>Description</th>
+                  <th>Value</th>
+                  <th>Action</th>
                 </tr>
               </tfoot>
               <tbody>
                 {expenses.length > 0 &&
                   expenses.map((item) => (
                     <tr key={item.id}>
-                      <td>{item.id}</td>
-                      <td>{item.category}</td>
-                      <td>{item.value}</td>
-                      <td>{item.description}</td>
                       <td>{item.date}</td>
+                      <td>{item.category}</td>
+                      <td>{item.description}</td>
+                      <td>{item.value}</td>
                       <td>
-                      <div className="dropdown mb-0">
-            <button className="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <div className="dropdown mb-0 ml-2">
+            <button className="btn btn-primary btn-sm mx-auto dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Action
             </button>
             <div className="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
