@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import ScriptTag from "react-script-tag";
 import Row from "../Dashboard/Row";
 import EarningsMonthly from "../Dashboard/EarningsMonthly";
-import EarningsAnnual from "../Dashboard/EarningsAnnual";
+import EarningsAnnual from "./EarningsAnnual";
 import Tasks from "../Dashboard/Tasks";
 import PendingRequests from "../Dashboard/PendingRequests";
 import { expensesData } from "./ExpensesData";
@@ -23,6 +23,7 @@ const Expenses = (props) => {
   const { currentUser, databaseService } = useAuth();
 
   const [expenses, setExpenses] = useState([]);
+  const [expensesTotal, setExpensesTotal] = useState(0);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
@@ -84,6 +85,7 @@ const Expenses = (props) => {
           } : item)
         $("#dataTable").DataTable().destroy();
         setExpenses(updatedExpenses)
+        updateTotalExpenses(updatedExpenses);
         $("#dataTable").DataTable();
         setSuccess("Os dados foram atualizados com sucesso.");
       } else {
@@ -100,6 +102,7 @@ const Expenses = (props) => {
         ]
         $("#dataTable").DataTable().destroy();
         setExpenses(newExpenses);
+        updateTotalExpenses(newExpenses);
         $("#dataTable").DataTable();
         setSuccess("Os dados foram salvos com sucesso. New id is: " + idRef.current.value);
       }
@@ -131,18 +134,22 @@ const Expenses = (props) => {
     valueRef.current.value = selectedItem.value;
   }
 
+  const updateTotalExpenses = (data) => {
+    const reducer = (sum, item) => sum + parseFloat(item.value);
+    const total = data.reduce(reducer, 0);
+    setExpensesTotal(total);
+  }
+
   useEffect(() => {
     const initDataTable = async () => {
       var data = await databaseService.getExpenses(currentUser.uid, {
         year: "2020",
         month: "01",
       });
-      console.log("=======> helloooooooo");
-      console.log(data);
-      console.log("=======> size " + data.length);
-      console.log("=======> helloooooooo");
+      
       $("#dataTable").DataTable().destroy();
       setExpenses(data);
+      updateTotalExpenses(data);
       $("#dataTable").DataTable();
     };
     initDataTable();
@@ -286,7 +293,7 @@ const Expenses = (props) => {
       </div>
       <Row>
         <EarningsMonthly />
-        <EarningsAnnual />
+        <EarningsAnnual total={expensesTotal}/>
         <Tasks />
         <PendingRequests />
       </Row>
