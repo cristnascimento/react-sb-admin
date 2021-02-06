@@ -3,7 +3,7 @@ import ScriptTag from "react-script-tag";
 import Row from "../Dashboard/Row";
 import EarningsMonthly from "../Dashboard/EarningsMonthly";
 import EarningsAnnual from "./EarningsAnnual";
-import Tasks from "../Dashboard/Tasks";
+import Tasks from "./Tasks";
 import PendingRequests from "../Dashboard/PendingRequests";
 import { expensesData } from "./ExpensesData";
 import { useAuth } from "../../Contexts/AuthContext";
@@ -294,7 +294,7 @@ const Expenses = (props) => {
       <Row>
         <EarningsMonthly />
         <EarningsAnnual total={expensesTotal}/>
-        <Tasks />
+        <Tasks/>
         <PendingRequests />
       </Row>
 
