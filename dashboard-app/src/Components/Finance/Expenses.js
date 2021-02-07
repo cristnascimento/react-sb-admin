@@ -85,7 +85,7 @@ const Expenses = (props) => {
           } : item)
         $("#dataTable").DataTable().destroy();
         setExpenses(updatedExpenses)
-        updateTotalExpenses(updatedExpenses);
+        // updateTotalExpenses(updatedExpenses);
         $("#dataTable").DataTable();
         setSuccess("Os dados foram atualizados com sucesso.");
       } else {
@@ -102,7 +102,7 @@ const Expenses = (props) => {
         ]
         $("#dataTable").DataTable().destroy();
         setExpenses(newExpenses);
-        updateTotalExpenses(newExpenses);
+        // updateTotalExpenses(newExpenses);
         $("#dataTable").DataTable();
         setSuccess("Os dados foram salvos com sucesso. New id is: " + idRef.current.value);
       }
@@ -149,7 +149,7 @@ const Expenses = (props) => {
       
       $("#dataTable").DataTable().destroy();
       setExpenses(data);
-      updateTotalExpenses(data);
+      // updateTotalExpenses(data);
       $("#dataTable").DataTable();
     };
     initDataTable();
@@ -158,6 +158,7 @@ const Expenses = (props) => {
   useEffect(() => {
     console.log("===========> expenses");
     console.log(expenses);
+    updateTotalExpenses(expenses);
   }, [expenses]);
 
   return (
