@@ -7,10 +7,10 @@ const Tasks = (props) => {
           <div className="card-body">
             <div className="row no-gutters align-items-center">
               <div className="col mr-2">
-                <div className="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks</div>
+                <div className="text-xs font-weight-bold text-info text-uppercase mb-1">Expenses Limit</div>
                 <div className="row no-gutters align-items-center">
                   <div className="col-auto">
-                    <div className="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                    <div className="h5 mb-0 mr-3 font-weight-bold text-gray-800">{props.percentage}%</div>
                   </div>
                   <div className="col">
                     <div className="progress progress-sm mr-2">

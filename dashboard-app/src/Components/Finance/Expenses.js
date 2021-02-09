@@ -295,7 +295,7 @@ const Expenses = (props) => {
       <Row>
         <EarningsMonthly />
         <EarningsAnnual total={expensesTotal}/>
-        <Tasks/>
+        <Tasks percentage={37.5}/>
         <PendingRequests />
       </Row>
 
