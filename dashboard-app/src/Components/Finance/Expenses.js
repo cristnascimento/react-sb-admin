@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import ScriptTag from "react-script-tag";
 import Row from "../Dashboard/Row";
-import EarningsMonthly from "../Dashboard/EarningsMonthly";
+import EarningsMonthly from "./EarningsMonthly";
 import EarningsAnnual from "./EarningsAnnual";
 import Tasks from "./Tasks";
 import PendingRequests from "../Dashboard/PendingRequests";
@@ -293,7 +293,7 @@ const Expenses = (props) => {
         </div>
       </div>
       <Row>
-        <EarningsMonthly />
+        <EarningsMonthly value={88}/>
         <EarningsAnnual total={expensesTotal}/>
         <Tasks percentage={37.5}/>
         <PendingRequests />
