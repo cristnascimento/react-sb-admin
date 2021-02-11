@@ -4,7 +4,7 @@ import Row from "../Dashboard/Row";
 import EarningsMonthly from "./EarningsMonthly";
 import EarningsAnnual from "./EarningsAnnual";
 import Tasks from "./Tasks";
-import PendingRequests from "../Dashboard/PendingRequests";
+import PendingRequests from "./PendingRequests";
 import { expensesData } from "./ExpensesData";
 import { useAuth } from "../../Contexts/AuthContext";
 
@@ -296,7 +296,7 @@ const Expenses = (props) => {
         <EarningsMonthly value={88}/>
         <EarningsAnnual total={expensesTotal}/>
         <Tasks percentage={37.5}/>
-        <PendingRequests />
+        <PendingRequests value={16}/>
       </Row>
 
       {/* DataTales Example */}
