@@ -293,10 +293,10 @@ const Expenses = (props) => {
         </div>
       </div>
       <Row>
-        <EarningsMonthly value={88}/>
-        <EarningsAnnual total={expensesTotal}/>
-        <Tasks percentage={37.5}/>
         <PendingRequests value={16}/>
+        <EarningsMonthly value={88}/>
+        <Tasks percentage={37.5}/>
+        <EarningsAnnual total={expensesTotal}/>
       </Row>
 
       {/* DataTales Example */}
