@@ -7,6 +7,7 @@ import Tasks from "./Tasks";
 import PendingRequests from "./PendingRequests";
 import { expensesData } from "./ExpensesData";
 import { useAuth } from "../../Contexts/AuthContext";
+import moment from 'moment';
 
 //import 'bootstrap/dist/css/bootstrap.min.css';
 import "jquery/dist/jquery.min.js";
@@ -153,6 +154,7 @@ const Expenses = (props) => {
       $("#dataTable").DataTable();
     };
     initDataTable();
+    console.log(moment().format('YYYY-MM-DD'))
   }, []);
 
   useEffect(() => {
