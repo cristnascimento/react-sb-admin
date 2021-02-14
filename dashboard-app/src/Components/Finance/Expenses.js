@@ -27,6 +27,7 @@ const Expenses = (props) => {
   const [expensesTotal, setExpensesTotal] = useState(0);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [currentDate, setCurrentDate] = useState("");
 
   const idRef = useRef();
   const categoryRef = useRef();
@@ -119,7 +120,9 @@ const Expenses = (props) => {
   const cleanRefs = () => {
     idRef.current.value = '';
     categoryRef.current.value = 'supermercado';
-    dateRef.current.value = '2021-02-01';
+    if (!dateRef) {
+      dateRef.current.value = '2021-02-01';
+    }
     descriptionRef.current.value = '';
     valueRef.current.value = '';
   }
@@ -154,8 +157,15 @@ const Expenses = (props) => {
       $("#dataTable").DataTable();
     };
     initDataTable();
-    console.log(moment().format('YYYY-MM-DD'))
+    let dateNow = moment().format('YYYY-MM-DD')
+    setCurrentDate(dateNow)
   }, []);
+
+  useEffect(() => {
+    dateRef.current.value = currentDate;
+    console.log('heeeeeeeere')
+    console.log(currentDate)
+  }, [currentDate]);
 
   useEffect(() => {
     console.log("===========> expenses");
