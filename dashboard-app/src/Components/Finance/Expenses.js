@@ -8,6 +8,7 @@ import PendingRequests from "./PendingRequests";
 import { expensesData } from "./ExpensesData";
 import { useAuth } from "../../Contexts/AuthContext";
 import moment from 'moment';
+import InputMask from 'react-input-mask';
 
 //import 'bootstrap/dist/css/bootstrap.min.css';
 import "jquery/dist/jquery.min.js";
@@ -282,6 +283,9 @@ const Expenses = (props) => {
                     aria-describedby="emailHelp"
                     placeholder="R$0,00 ..."
                   />
+                </div>
+                <div className="form-group">
+                <InputMask mask="99/99/9999" className="form-control form-control-user"></InputMask>                
                 </div>
               </form>
             </div>
