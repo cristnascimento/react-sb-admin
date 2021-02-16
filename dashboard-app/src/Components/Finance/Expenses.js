@@ -9,6 +9,7 @@ import { expensesData } from "./ExpensesData";
 import { useAuth } from "../../Contexts/AuthContext";
 import moment from 'moment';
 import InputMask from 'react-input-mask';
+import CurrencyInput from 'react-currency-input';
 
 //import 'bootstrap/dist/css/bootstrap.min.css';
 import "jquery/dist/jquery.min.js";
@@ -285,7 +286,8 @@ const Expenses = (props) => {
                   />
                 </div>
                 <div className="form-group">
-                <InputMask mask="99/99/9999" className="form-control form-control-user"></InputMask>                
+                {/*<InputMask mask="99/99/9999" className="form-control form-control-user"></InputMask>*/}
+                <CurrencyInput prefix="R$" placeholder="R$0,00" decimalSeparator="." thousandSeparator="" precision="2" className="form-control form-control-user"/>
                 </div>
               </form>
             </div>
