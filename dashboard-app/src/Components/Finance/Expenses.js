@@ -275,6 +275,7 @@ const Expenses = (props) => {
                     placeholder="Description..."
                   />
                 </div>
+                {/*
                 <div className="form-group">
                   <input
                     type="text"
@@ -285,9 +286,10 @@ const Expenses = (props) => {
                     placeholder="R$0,00 ..."
                   />
                 </div>
+                */}
                 <div className="form-group">
                 {/*<InputMask mask="99/99/9999" className="form-control form-control-user"></InputMask>*/}
-                <CurrencyInput prefix="R$" placeholder="R$0,00" decimalSeparator="." thousandSeparator="" precision="2" className="form-control form-control-user"/>
+                <CurrencyInput  ref={valueRef} id="inputValue" prefix="R$" placeholder="R$0,00" decimalSeparator="." thousandSeparator="" precision="2" className="form-control form-control-user"/>
                 </div>
               </form>
             </div>
