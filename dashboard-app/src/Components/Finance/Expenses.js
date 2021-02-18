@@ -30,6 +30,7 @@ const Expenses = (props) => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [currentDate, setCurrentDate] = useState("");
+  const [modalValue, setModalValue] = useState(0);
 
   const idRef = useRef();
   const categoryRef = useRef();
@@ -37,6 +38,11 @@ const Expenses = (props) => {
   const descriptionRef = useRef();
   const valueRef = useRef();
   const tableRef = useRef(null);
+
+  const handleChangeModalValue = (maskedvalue, floatvalue, event) => {
+    console.log(floatvalue)
+    setModalValue(floatvalue);
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -58,8 +64,8 @@ const Expenses = (props) => {
       return;
     }
 
-    if (!valueRef.current.value) {
-      setError("Value is empty");
+    if (!modalValue) {
+      setError("Value is zero");
       return;
     }
 
@@ -68,7 +74,7 @@ const Expenses = (props) => {
         category: categoryRef.current.value,
         date: dateRef.current.value,
         description: descriptionRef.current.value,
-        value: valueRef.current.value,
+        value: modalValue//valueRef.current.value,
       };
 
       let theexpense = {
@@ -126,18 +132,22 @@ const Expenses = (props) => {
       dateRef.current.value = '2021-02-01';
     }
     descriptionRef.current.value = '';
-    valueRef.current.value = '';
+    setModalValue(0)
+    //valueRef.current.value = '';
   }
 
   const handleEdit = (event, id) => {
     event.preventDefault()
     cleanRefs();
     let selectedItem = expenses.find(item => item.id === id)
+    console.log("#####################  === " + selectedItem.value);
     idRef.current.value = id;
     categoryRef.current.value = selectedItem.category;
     dateRef.current.value = selectedItem.date;
     descriptionRef.current.value = selectedItem.description;
-    valueRef.current.value = selectedItem.value;
+    setModalValue(selectedItem.value);
+    
+    
   }
 
   const updateTotalExpenses = (data) => {
@@ -289,7 +299,7 @@ const Expenses = (props) => {
                 */}
                 <div className="form-group">
                 {/*<InputMask mask="99/99/9999" className="form-control form-control-user"></InputMask>*/}
-                <CurrencyInput  ref={valueRef} id="inputValue" prefix="R$" placeholder="R$0,00" decimalSeparator="." thousandSeparator="" precision="2" className="form-control form-control-user"/>
+                <CurrencyInput  ref={valueRef} value={modalValue} id="inputValue" prefix="R$" placeholder="R$0,00" decimalSeparator="." thousandSeparator="" precision="2" className="form-control form-control-user" onChange={handleChangeModalValue}/>  
                 </div>
               </form>
             </div>
