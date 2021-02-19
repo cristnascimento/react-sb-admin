@@ -129,7 +129,7 @@ const Expenses = (props) => {
     idRef.current.value = '';
     categoryRef.current.value = 'supermercado';
     if (!dateRef) {
-      dateRef.current.value = '2021-02-01';
+      dateRef.current.value = currentDate;
     }
     descriptionRef.current.value = '';
     setModalValue(0)
