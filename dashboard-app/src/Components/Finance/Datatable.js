@@ -3,9 +3,6 @@ import React, { useRef, useEffect, useState } from "react";
 const Datatable = (props) => {
 
   return (
-    <div className="container-fluid">
-
-      {/* DataTales Example */}
       <div className="card shadow mb-4">
         <div className="card-header py-3">
           <div className="d-sm-flex align-items-center justify-content-between">
@@ -75,9 +72,6 @@ const Datatable = (props) => {
           </div>
         </div>
       </div>
-
-      {/* /.container-fluid */}
-    </div>
   );
 };
 
