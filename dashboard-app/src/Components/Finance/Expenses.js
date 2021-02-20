@@ -21,6 +21,7 @@ import "../../vendor/datatables/dataTables.bootstrap4.min.js";
 import "../../vendor/datatables/dataTables.bootstrap4.min.css";
 
 import $ from "jquery";
+import Datatable from "./Datatable";
 
 const Expenses = (props) => {
   const { currentUser, databaseService } = useAuth();
@@ -401,6 +402,7 @@ const Expenses = (props) => {
       </div>
 
       {/* /.container-fluid */}
+      <Datatable tableRef={tableRef} expenses={expenses} handleEdit={handleEdit}/>
     </div>
   );
 };
