@@ -11,17 +11,7 @@ import moment from 'moment';
 import InputMask from 'react-input-mask';
 import CurrencyInput from 'react-currency-input';
 
-//import 'bootstrap/dist/css/bootstrap.min.css';
-import "jquery/dist/jquery.min.js";
-//import "datatables.net-dt/js/dataTables.dataTables"
-//import "datatables.net-dt/css/jquery.dataTables.min.css"
-
-import "../../vendor/datatables/jquery.dataTables.min.js";
-import "../../vendor/datatables/dataTables.bootstrap4.min.js";
-import "../../vendor/datatables/dataTables.bootstrap4.min.css";
-
-import $ from "jquery";
-import Datatable from "./Datatable";
+import Datatable, {datatableDestroy, datatableInit} from "./Datatable";
 
 const Expenses = (props) => {
   const { currentUser, databaseService } = useAuth();
@@ -94,10 +84,11 @@ const Expenses = (props) => {
             id: idRef.current.value,
             ...data
           } : item)
-        $("#dataTable").DataTable().destroy();
+        // $("#dataTable").DataTable().destroy();
+        datatableDestroy();
         setExpenses(updatedExpenses)
         // updateTotalExpenses(updatedExpenses);
-        $("#dataTable").DataTable();
+        datatableInit();
         setSuccess("Os dados foram atualizados com sucesso.");
       } else {
         console.log("CREATE" )
@@ -111,10 +102,12 @@ const Expenses = (props) => {
             ...data
           }
         ]
-        $("#dataTable").DataTable().destroy();
+        // $("#dataTable").DataTable().destroy();
+        datatableDestroy();
         setExpenses(newExpenses);
         // updateTotalExpenses(newExpenses);
-        $("#dataTable").DataTable();
+        // $("#dataTable").DataTable();
+        datatableInit();
         setSuccess("Os dados foram salvos com sucesso. New id is: " + idRef.current.value);
       }
       
@@ -164,10 +157,12 @@ const Expenses = (props) => {
         month: "01",
       });
       
-      $("#dataTable").DataTable().destroy();
+      // $("#dataTable").DataTable().destroy();
+      datatableDestroy();
       setExpenses(data);
       // updateTotalExpenses(data);
-      $("#dataTable").DataTable();
+      // $("#dataTable").DataTable();
+      datatableInit();
     };
     initDataTable();
     let dateNow = moment().format('YYYY-MM-DD')
@@ -328,9 +323,7 @@ const Expenses = (props) => {
         <EarningsMonthly value={88}/>
         <Tasks percentage={37.5}/>
         <EarningsAnnual total={expensesTotal}/>
-      </Row>
-
-      
+      </Row>     
       <Datatable tableRef={tableRef} expenses={expenses} handleEdit={handleEdit}/>
     </div>
   );

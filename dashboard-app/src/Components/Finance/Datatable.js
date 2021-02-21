@@ -1,5 +1,24 @@
 import React, { useRef, useEffect, useState } from "react";
 
+//import 'bootstrap/dist/css/bootstrap.min.css';
+import "jquery/dist/jquery.min.js";
+//import "datatables.net-dt/js/dataTables.dataTables"
+//import "datatables.net-dt/css/jquery.dataTables.min.css"
+
+import "../../vendor/datatables/jquery.dataTables.min.js";
+import "../../vendor/datatables/dataTables.bootstrap4.min.js";
+import "../../vendor/datatables/dataTables.bootstrap4.min.css";
+
+import $ from "jquery";
+
+export const datatableDestroy = () => {
+    $("#dataTable").DataTable().destroy();
+}
+
+export const datatableInit = () => {
+    $("#dataTable").DataTable();
+}
+
 const Datatable = (props) => {
 
   return (
