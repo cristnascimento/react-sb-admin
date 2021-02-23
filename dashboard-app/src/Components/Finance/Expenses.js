@@ -84,11 +84,7 @@ const Expenses = (props) => {
             id: idRef.current.value,
             ...data
           } : item)
-        // $("#dataTable").DataTable().destroy();
-        datatableDestroy();
-        setExpenses(updatedExpenses)
-        // updateTotalExpenses(updatedExpenses);
-        datatableInit();
+        updateData(updatedExpenses)
         setSuccess("Os dados foram atualizados com sucesso.");
       } else {
         console.log("CREATE" )
@@ -102,12 +98,7 @@ const Expenses = (props) => {
             ...data
           }
         ]
-        // $("#dataTable").DataTable().destroy();
-        datatableDestroy();
-        setExpenses(newExpenses);
-        // updateTotalExpenses(newExpenses);
-        // $("#dataTable").DataTable();
-        datatableInit();
+        updateData(newExpenses)
         setSuccess("Os dados foram salvos com sucesso. New id is: " + idRef.current.value);
       }
       
@@ -140,8 +131,6 @@ const Expenses = (props) => {
     dateRef.current.value = selectedItem.date;
     descriptionRef.current.value = selectedItem.description;
     setModalValue(selectedItem.value);
-    
-    
   }
 
   const updateTotalExpenses = (data) => {
@@ -150,34 +139,34 @@ const Expenses = (props) => {
     setExpensesTotal(total);
   }
 
-  useEffect(() => {
-    const initDataTable = async () => {
-      var data = await databaseService.getExpenses(currentUser.uid, {
-        year: "2020",
-        month: "01",
-      });
-      
-      // $("#dataTable").DataTable().destroy();
-      datatableDestroy();
-      setExpenses(data);
-      // updateTotalExpenses(data);
-      // $("#dataTable").DataTable();
-      datatableInit();
-    };
-    initDataTable();
+  const updateData = (data) => {
+    datatableDestroy();
+    setExpenses(data);
+    datatableInit();
+  }
+
+  const initDataTable = async () => {
+    var data = await databaseService.getExpenses(currentUser.uid, {
+      year: "2020",
+      month: "01",
+    });
+    updateData(data)
+  };
+
+  const initCurrentDate = () => {
     let dateNow = moment().format('YYYY-MM-DD')
     setCurrentDate(dateNow)
+  }
+  useEffect(() => {
+    initDataTable();
+    initCurrentDate()
   }, []);
 
   useEffect(() => {
     dateRef.current.value = currentDate;
-    console.log('heeeeeeeere')
-    console.log(currentDate)
   }, [currentDate]);
 
   useEffect(() => {
-    console.log("===========> expenses");
-    console.log(expenses);
     updateTotalExpenses(expenses);
   }, [expenses]);
 
